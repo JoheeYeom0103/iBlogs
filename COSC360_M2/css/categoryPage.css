@@ -1,0 +1,100 @@
+/* changes the bkg colour of the header and sets the "iblogs" text to 
+be in the center of the header */
+header {
+  background-color: #f4e5ce;
+  padding: 0.625em;
+  text-align: center;
+}
+
+/* sets all h1's to be in font Aboreto */
+h1 {
+  font-family: "Aboreto";
+}
+
+/* sets all body text to be in font montserrat 
+and changes bkg colour */
+body {
+  font-family: "Montserrat";
+  margin: 0;
+  padding: 0;
+  background-color: #f8f5ee;
+}
+
+/* moves footer text content to the center and changes 
+the bkg colour of the footer*/
+footer {
+  text-align: center;
+  padding: 1.25em;
+  background-color: #f4e5ce;
+}
+
+.done-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5em;
+}
+
+button {
+  border-color: #e8dbc7;
+  border-radius: 10px;
+  background-color: #e8dbc7;
+  padding: 10px 20px;
+  margin: 5px;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  font-size: 1em;
+}
+
+button:hover {
+  background-color: #d2c1ab;
+}
+
+.category-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+}
+
+.category-preferences1 {
+  display: flex;
+  align-items: start;
+  justify-content: center;
+  flex-direction: column;
+  margin-right: 50px;
+}
+
+.category-preferences2 {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: center;
+  margin: 0.5em;
+  margin-left: 50px;
+}
+
+input[type="checkbox"] {
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
+#text {
+  border-color: #e8dbc7;
+  border-radius: 10px;
+  background-color: #e8dbc7;
+  padding: 10px 20px;
+  margin: 5px;
+  width: 20%;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  font-size: 1em;
+}
+
+@media only screen and (max-width: 600px) {
+
+  .category-preferences1{
+    margin-right: 0px;
+    padding-left: 2em;
+  }
+ 
+}

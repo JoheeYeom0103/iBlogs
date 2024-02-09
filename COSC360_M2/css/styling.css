@@ -1,0 +1,164 @@
+
+/* changes the bkg colour of the header and sets the "iblogs" text to 
+be in the center of the header */
+/* header {
+    background-color: #f4e5ce;
+    padding: 0.625em;
+    text-align: center;
+} */
+
+/* styles the menu for the login and sign up buttons
+on the RHS with no bullet points */
+/* nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: right;
+} */
+
+/* moves the menu with the login and sign up buttons to the right*/
+/* nav li {
+    margin-right: 0.9375em;
+} */
+
+/* sets the menu items login and sign up to be black font */
+/* nav a{
+    color:black;
+} */
+
+/* removes the underline from the menu links when visited, 
+hovered over, or active */
+/* nav a:link, a:visited, a:hover, a:active { 
+    text-decoration: none; 
+}  */
+
+/* Stying for the search bar on the page */
+.mainSearch input{
+    width: 60%;
+    padding: 0.625em;
+    border-radius: 0.625em;
+    border-width: 0.13em;
+    border-color:#000000;
+    background-color:#f8f5ee;
+    font-family: 'Montserrat';
+}
+
+/* puts the search bar in a flex grid and moves it to the center,
+also adds padding from the header */
+.mainSearch{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding-top: 2.5em;
+}
+
+/* sets all h1's to be in font Aboreto */
+h1{
+    font-family: 'Aboreto';
+}
+
+/* sets all body text to be in font montserrat 
+and changes bkg colour */
+body {
+    font-family: 'Montserrat';
+    margin: 0;
+    padding: 0;
+    background-color: #f8f5ee;
+}
+
+
+/* creates the flex grid layout for the category section */
+section[id="categorySection"]{
+    display: flex;
+    flex-wrap:wrap;
+    justify-content: space-around;
+    padding: 1.3em;
+}
+
+/* sets the images for the categories and adds some styling */
+.category {
+    width: 12.5em;
+    margin: 1.3em 0.625em;
+    border-radius: 0.9375em;
+    overflow: hidden;
+}
+
+/* same as above */
+.category img {
+    width: 100%;
+    height: auto;
+}
+
+/* creates the flex grid layout for the user post section */
+section#userPostSection{
+    flex-wrap: wrap;
+    background-color: #d3c1ab;
+    padding: 3.125em 0 3.125em 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    max-width: 100%;
+}
+
+.userPostColumn1, .userPostColumn2 {
+    box-sizing: border-box;
+    padding: 0 0.25em;
+}
+
+/* sets the images for the user posts and adds some styling */
+.userPosts {
+    width: 31.25em;
+    margin: 0.625em 0.625em;
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+/* same as above */
+.userPosts img {
+    width: 100%;
+    height: auto;
+}
+
+/* moves footer text content to the center and changes 
+the bkg colour of the footer*/
+footer {
+    text-align: center;
+    padding: 1.25em;
+    background-color: #f4e5ce;
+}
+
+/* ----------------------------------------------------------------- */
+
+    @media only screen and (max-width: 600px) {
+    nav ul{
+        padding-right:1.75em;
+        justify-content: center;
+    }
+
+    /* Responsive search bar styles for mobile */
+    .mainSearch input {
+        width: 80%; /* Adjusting width for mobile */
+    }
+
+    .mainSearch {
+        padding-top: 1.5em; /* Adjusting padding for mobile */
+    }
+
+    section[id="categorySection"] {
+        justify-content: center; /* Centering categories on mobile */
+    }
+
+    .category {
+        width: 100%; /* Full width for mobile */
+    }
+
+    section#userPostSection {
+        padding: 1.25em; /* Adjusting padding for mobile */
+        flex-direction: column; /* Stacking columns on mobile */
+    }
+
+    .userPosts {
+        width: 95%; /* Adjusting width for mobile */
+    }
+
+} /* End Media Query */
