@@ -3,6 +3,9 @@ body {
     background-color: #F8F5EE;
     font-family: Montserrat;
     color: #443829;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
 
@@ -29,15 +32,18 @@ nav li {
 }
 
 /* sets the menu items login and sign up to be black font */
-nav a{
-    color:black;
+nav a {
+    color: black;
 }
 
 /* removes the underline from the menu links when visited, 
 hovered over, or active */
-nav a:link, a:visited, a:hover, a:active { 
-    text-decoration: none; 
-} 
+nav a:link,
+a:visited,
+a:hover,
+a:active {
+    text-decoration: none;
+}
 
 /* moves footer text content to the center and changes 
 the bkg colour of the footer*/
@@ -47,4 +53,5 @@ footer {
     text-align: center;
     padding: 1.3em;
     background-color: #f4e5ce;
+    margin-top: auto;
 }
