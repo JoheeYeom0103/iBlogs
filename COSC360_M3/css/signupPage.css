@@ -1,0 +1,114 @@
+h3{
+  text-align: center;
+}
+
+#signupsection {
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 207px;
+}
+
+.firstname-input, .lastname-input, .email-input, 
+.username-input, 
+.password-input,
+.confirm-password-input{
+  display: flex;
+  flex-direction: column;
+  font-family: "Montserrat";
+  margin: 0.25em;
+  padding: 1em;
+  border-radius: 10px;
+  border-color: #D3c1ab;
+}
+
+
+.loginBox{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 5em;
+}
+
+.terms{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.signup-button{
+  margin-left: 4em;
+}
+
+button {
+  border-color: #e8dbc7;
+  border-radius: 10px;
+  background-color: #e8dbc7;
+  margin: 5px;
+  padding: 0.5em 0.5em;
+  font-size: 1em;
+  font-family: "Montserrat";
+}
+
+button:hover {
+  background-color: #d2c1ab;
+}
+
+/* ------------------------------------------------------------------ */
+
+/* TOOLTIP */
+.tooltip-username,
+.tooltip-password,
+.tooltip-firstname,
+.tooltip-lastname,
+.tooltip-email,
+.tooltip-confirmPassword {
+  position:relative;
+  float: right;
+  bottom: 2em;
+}
+
+.tooltip-message {
+  background-color: #ffffff;
+  color: #000000;
+  text-align: center;
+  border-radius: 10px;
+  position: absolute;
+  z-index: 1;
+  padding: 0.5em;
+  font-size: 0.7em;
+  top: 50%;
+  opacity: 0;
+  transition: opacity ease-in-out 0.3s;
+  max-width: 20em;
+  width: max-content;
+}
+
+/* Show tooltip message on hover */
+.tooltip-username:hover .tooltip-message,
+.tooltip-password:hover .tooltip-message,
+.tooltip-firstname:hover .tooltip-message,
+.tooltip-lastname:hover .tooltip-message,
+.tooltip-email:hover .tooltip-message,
+.tooltip-confirmPassword:hover .tooltip-message {
+  opacity:1;
+}
+
+.help-icon {
+  width: 16px;
+  height: 16px;
+}
+
+@media only screen and (max-width: 600px) {
+
+  .tooltip-message {
+    font-size: x-small;
+    max-width: 5em;
+    width: max-content;
+  } 
+
+}
