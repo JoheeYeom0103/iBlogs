@@ -1,15 +1,12 @@
-/* user-profile container */
 .user-profile {
     width: 100%;
     margin: 2em;
 }
 
-/* user image */
 .user-profile img {
     width: 10em; 
 }
 
-/* User Name */
 .user-profile p {
     font-size: 1.5em;
     margin: 10px 0;
@@ -67,8 +64,8 @@ input:focus {
 
 
 #profile-details {
+    width: 80%;
     margin: 0 auto; 
-    max-width: 600px; 
 }
 
 
@@ -93,7 +90,7 @@ input:focus {
 #userNames {
     display: flex;
     justify-content: flex-start;
-    gap: 0;
+    gap: 2em;
 }
 
 #userPw {
@@ -117,9 +114,77 @@ input:focus {
     font-weight: lighter;
 }
 
+.profile-field {
+    display: flex; 
+    align-items: center; 
+}
+
+.profile-field .helpIcon {
+    width: 1em;
+}
+
+.profile-field img,
+.profile-field p {
+    margin: 0;
+    margin-right: 5px; 
+}
+
+.profile-field p {
+    opacity: 0; 
+    font-size: 0.7em;
+    width: fit-content;
+    max-width: 15em;
+    padding: 1em;
+    transition: opacity ease-in-out 0.3s;
+}
+
+/* if .profile-field .helpIcon is hovered, update p 
+   which is an immediate sibling of  .profile-field .helpIcon */
+.profile-field .helpIcon:hover + p {
+    opacity: 1; 
+    background-color: white;
+  
+}
+
+.required.highlight {
+    background-color: #F9EDE2 !important;
+}
+
 @media screen and (max-width: 600px) {
     #userNames, #userPw, #interest-field {
         display: block;
     }
+
+    .user-profile {
+        width: 100%;
+        margin: 0;
+        padding: 0;
+    }
+
+    input {
+        background-color: transparent;
+        border: none;
+        width: fit-content;
+        max-width: 7.5em;
+        border-bottom: #d2c1ab 0.1em solid;
+    }
+
+    .profile-field {
+        display: block;
+    }
+
+    .profile-field p {
+        display: block;
+        margin: 0.5em 0 0 0;
+        opacity: 0; 
+        font-size: 0.7em;
+        width: fit-content;
+        max-width: 15em;
+        padding: 1em;
+        transition: opacity ease-in-out 0.3s;
+    }
+    
 }
+
+
 
