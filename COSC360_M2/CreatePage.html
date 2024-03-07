@@ -12,6 +12,10 @@
     <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
     <link href='https://fonts.googleapis.com/css?family=Aboreto' rel='stylesheet'>
     <!--Font Files-->
+    <!-- Scripts -->
+    <script src="createPage.js"></script>
+    <!-- Scripts -->
+
 </head>
 
 <body>
@@ -28,27 +32,72 @@
     </header> 
 
     <div class="diary-container">
-        <div class="header">
+        <form id="createPostForm" action="http://www.randyconnolly.com/tests/process.php" method="post">
+        
+            <div class="header">
             <h2>February 5, 2024</h2>
             <hr class="line">
             <img src="images/title.svg" class="title-icon"/>
             <p class="inputHint">Title: </p>
             <input type="text" name="title" class="inputLine"></input>
+            <span class="tooltip-title">
+                <img src="images/helpIcon-01.svg" alt="Help Icon" class="help-icon">
+                <span class="tooltip-message">Please write a caption title for your post.</span>
+            </span>
             <br/>
             <img src="images/cateogry.svg" class="category-icon"/>
             <p class="inputHint">Category:</p>
-            <input type="text" name="category" class="inputLine"></input> 
+            <select name="category" class="inputLine">
+                <option value="" disabled selected>Select a category</option>
+                <option value="Personal">Personal</option>
+                <option value="Travel">Travel</option>
+                <option value="Food">Food</option>
+                <option value="Lifestyle">Lifestyle</option>
+                <option value="Health">Health</option>
+                <option value="Fitness">Fitness</option>
+                <option value="Fashion">Fashion</option>
+                <option value="Beauty">Beauty</option>
+                <option value="Technology">Technology</option>
+                <option value="Entertainment">Entertainment</option>
+                <option value="Sports">Sports</option>
+                <option value="Education">Education</option>
+                <option value="Business">Business</option>
+                <option value="Finance">Finance</option>
+                <option value="Science">Science</option>
+                <option value="Environment">Environment</option>
+                <option value="Politics">Politics</option>
+                <option value="Art">Art</option>
+                <option value="Music">Music</option>
+                <option value="Movies">Movies</option>
+                <option value="Books">Books</option>
+                <option value="Games">Games</option>
+                <option value="Other">Other</option>
+            </select>
+            <span class="tooltip-category">
+                <img src="images/helpIcon-01.svg" alt="Help Icon" class="help-icon">
+                <span class="tooltip-message">Please select a category for your post.</span>
+            </span>
         </div>
         <div class="content">
-            <textarea class="diary-entry" placeholder="Share your experience and insights!"></textarea>
+            <textarea class="diary-entry" name="diary-entry" placeholder="Share your experience and insights!"></textarea>
+            <span class="tooltip-content">
+                <img src="images/helpIcon-01.svg" alt="Help Icon" class="help-icon">
+                <span class="tooltip-message"> Please write down your thoughts in the text box. </span>
+            </span>
         </div>
         <div class="footer">
             <button class="share-btn"><span class="buttonText">Share with</span></button>
-            <div class="share-options">
-                <button class="buttonText">Public</button>
-                <button class="buttonText">Private</button>
+                <div class="share-options">
+                <button class="buttonText" name="publicPost">Public</button>
+                <button class="buttonText" name="privatePost">Private</button>
             </div>
+            <span class="tooltip-share">
+                <img src="images/helpIcon-01.svg" alt="Help Icon" class="help-icon">
+                <span class="tooltip-message">Please hover over the "Share" button to select either "public" or "private" for your post.</span>
+            </span>
         </div>
+        
+        </form>
     </div>
 
     <footer>
