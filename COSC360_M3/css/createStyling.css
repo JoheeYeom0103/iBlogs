@@ -1,0 +1,179 @@
+h2 {
+  font-weight: bold;
+}
+
+.diary-container {
+  width: 70%;
+  margin: 50px auto;
+  border: 1px solid #d2c1ab;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.line {
+  width: 100%;
+  margin: 5px 0;
+  border-top: 1px solid #d2c1ab;
+}
+
+.inputHint {
+  display: inline;
+}
+.inputLine {
+  width: 70%;
+  display: inline-block;
+  margin: 1em 0;
+  padding: 0.3em;
+  background-color: transparent;
+  border: transparent;
+  border-bottom: 1px solid #d2c1ab;
+}
+
+.title-icon {
+  width: 1em;
+  margin-bottom: -0.4em;
+}
+
+.category-icon {
+  width: 1.4em;
+  margin-bottom: -0.4em;
+}
+.content {
+  margin: 20px 0;
+}
+
+.diary-entry {
+  width: 100%;
+  height: 200px;
+  padding: 10px;
+  box-sizing: border-box;
+  background-color: transparent;
+  border: 1px solid #d2c1ab;
+}
+
+.inputLine:focus {
+  outline-width: 0.5em;
+  outline-color: #d2c1ab;
+}
+
+.diary-entry:focus {
+  outline-width: 0.5em;
+  outline-color: #d2c1ab;
+}
+
+.buttonText {
+  color: #443829;
+}
+
+.share-btn {
+  border-color: transparent;
+  border-radius: 10px;
+  background-color: #e8dbc7;
+  padding: 0.5em 1em;
+  margin-top: 2em;
+  margin-right: 0em;
+  font-size: 1em;
+  cursor: pointer;
+}
+
+.share-options {
+  display: none;
+  margin-left: 0;
+}
+
+.share-options .buttonText {
+  display: block;
+  width: 7em;
+  margin-left: 0;
+  text-align: center;
+  cursor: pointer;
+  padding: 0.6em;
+  background-color: #e8dbc7;
+  border-color: transparent;
+  border-radius: 0.5em;
+}
+
+.buttonText:hover {
+  background-color: #d3c1aa;
+}
+
+/* .classA + .classB: select an element with classB attached that is a immediate child of an element with classA attached
+Change the display to block an element with share-options class whose immediate parent is share-btn and when it's hovered
+Keep the display to block when share-options is hovered even if share-btn is not hovered anymore */
+.share-btn:hover + .share-options,
+.share-options:hover {
+  display: block;
+}
+
+.share-options:hover ~ .share-btn,
+.share-btn:hover {
+  background-color: #d2c1ab; /* Change the background color of share-btn when share-options is hovered */
+}
+
+.footer {
+  display: flex;
+}
+
+.help-icon {
+  width: 16px;
+  /* Set the width of the image */
+  height: 16px;
+  /* Set the height of the image */
+}
+
+.tooltip-title,
+.tooltip-category {
+  position: absolute;
+  float: right;
+  padding-top: 1em;
+  padding-left: 0.5em;
+}
+
+.tooltip-category {
+  padding-top: 0.5em;
+}
+
+.tooltip-content {
+  position: absolute;
+  float: right;
+  padding-left: 0.2em;
+}
+
+.tooltip-share {
+  position: relative;
+  float: left;
+  padding-top: 1.5em;
+  padding-left: 0.5em;
+}
+
+.tooltip-message {
+  background-color: #ffffff;
+  color: #000000;
+  text-align: center;
+  border-radius: 10px;
+  position: absolute;
+  z-index: 1;
+  padding: 0.5em;
+  font-size: 0.7em;
+  top: 50%;
+  opacity: 0;
+  transition: opacity ease-in-out 0.3s;
+  max-width: 20em;
+  width: max-content;
+}
+
+.tooltip-title:hover .tooltip-message {
+  opacity: 1;
+}
+
+.tooltip-category:hover .tooltip-message {
+  opacity: 1;
+}
+
+.tooltip-content:hover .tooltip-message {
+  opacity: 1;
+}
+
+.tooltip-share:hover .tooltip-message {
+  opacity: 1;
+}

@@ -1,0 +1,125 @@
+/* user-profile container */
+.user-profile {
+    width: 100%;
+    margin: 2em;
+}
+
+/* user image */
+.user-profile img {
+    width: 10em; 
+}
+
+/* User Name */
+.user-profile p {
+    font-size: 1.5em;
+    margin: 10px 0;
+}
+
+label {
+    width: fit-content;
+    margin: 0.5em;
+    font-weight: bold;
+}
+
+input {
+    width: fit-content;
+}
+
+#changeBtn {
+    border-color: transparent;
+    border-radius: 0.5em;
+    background-color: #e8dbc7;
+    padding: 0.25em;
+    margin: 5px;
+    font-size: 0.8em;
+}
+
+#changeBtn:hover {
+    background-color: #d2c1ab;   
+}
+
+.buttons {
+    border-color: transparent;
+    border-radius: 10px;
+    background-color: #e8dbc7;
+    padding: 0.5em 1em;
+    margin-top: 2em;
+    margin-right: 1em;
+    font-size: 1em;
+}
+
+.buttons:hover {
+    background-color: #d2c1ab;
+}
+
+input {
+
+    background-color: transparent;
+    border: none;
+    width: fit-content;
+    border-bottom: #d2c1ab 0.1em solid;
+}
+
+input:focus {
+    outline-width: 0.5em;
+    outline-color: #d2c1ab;
+}
+
+
+#profile-details {
+    margin: 0 auto; 
+    max-width: 600px; 
+}
+
+
+.user-profile {
+    text-align: left;
+    margin-top: 20px;
+}
+
+.user-profile img {
+    width: 100px; 
+}
+
+.profile-field {
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+
+.profile-field input {
+    padding: 0.3em;
+}
+
+#userNames {
+    display: flex;
+    justify-content: flex-start;
+    gap: 0;
+}
+
+#userPw {
+    display: flex;
+    justify-content: flex-start;
+    gap: 0;
+}
+
+#interest-field{
+    display: flex;
+    justify-content: flex-start;
+    gap: 0;
+}
+
+#interest-field div {
+    margin-top: 1em;
+    margin-right: 3em;
+}
+
+#interest-field label {
+    font-weight: lighter;
+}
+
+@media screen and (max-width: 600px) {
+    #userNames, #userPw, #interest-field {
+        display: block;
+    }
+}
+

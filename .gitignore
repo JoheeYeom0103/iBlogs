@@ -1,0 +1,54 @@
+# System-specific files #
+#####################
+*.log
+*.sql
+*.sqlite
+.DS_Store # macOS system file
+Thumbs.db # Windows system file
+desktop.ini # Windows system file
+
+# Dependency directories #
+#####################
+/vendor/ # PHP composer dependency folder
+/node_modules/ # Node.js dependency folder
+
+# Sensitive data files #
+#####################
+/config.php # Often contains sensitive information
+/.env # Environment specific settings that may contain sensitive info
+
+# IDE specific files #
+#####################
+/.idea/ # JetBrains PhpStorm and other JetBrains IDEs
+*.sublime-workspace # Sublime Text specific project files
+*.sublime-project # Sublime Text specific project files
+.vscode/ # Visual Studio Code folders
+*.swp # Vim swap files
+*~ # Backup files created by some text editors
+
+# Runtime generated files #
+#####################
+/cache/
+/logs/
+/tmp/
+
+# User uploaded files (if applicable) #
+#####################
+/uploads/
+
+# Compiled static assets #
+#####################
+/public/build/
+/public/mix-manifest.json
+
+# PHP server artifacts #
+#####################
+/php_errorlog
+
+# Others #
+#####################
+/.sass-cache/
+/composer.lock
+/package-lock.json
+/yarn.lock
+

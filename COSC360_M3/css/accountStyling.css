@@ -1,0 +1,100 @@
+/* user-profile container */
+.user-profile {
+    text-align: center;
+    margin-top: 20px;
+}
+
+/* user image */
+.user-profile img {
+    width: 100px; 
+}
+
+/* User Name */
+.user-profile p {
+    font-size: 1.5em;
+    margin: 10px 0;
+}
+
+.round-button {
+    border-color: transparent;
+    border-radius: 10px;
+    background-color: #e8dbc7;
+    padding: 10px 20px;
+    margin: 5px;
+    font-size: 1em;
+}
+
+.round-button:hover {
+    background-color: #d2c1ab;
+}
+
+.calendar-container {
+    margin: 1em 0 1em 0;
+    text-align: center;
+}
+
+.calendar {
+    width: 70%;
+    display: inline-block;
+    border: 1px solid #e8dbc7;
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+}
+
+
+
+.month {
+    background-color: #d2c1ab;
+    color: #fff;
+    padding: 1em;
+    font-size: 1em;
+    margin: 0;
+}
+
+.days {
+    list-style: none;
+    display: flex;
+    justify-content: space-around;
+    background-color: #e8dbc7;
+    padding: 0.5em;
+    margin: 0;
+}
+
+.days li {
+    width: 10em;
+    text-align: center;
+}
+
+.dates {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 0;
+    padding: 0;
+    margin: 0;
+}
+
+.dates li {
+    width: 100%;
+    padding: 20%;
+    text-align: right;
+    line-height: 3em;
+    cursor: pointer;
+    border: 0.5px solid #e8dbc7;
+    position: relative; 
+    box-sizing: border-box;
+}
+
+.dates li:hover {
+    background: rgba(232, 219, 199, 10);
+}
+
+
+
+.dateposition {
+    position: relative;
+    top: -55%;
+    right: -25%;
+}
+

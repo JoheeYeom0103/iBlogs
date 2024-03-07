@@ -1,0 +1,131 @@
+/* changes the bkg colour of the header and sets the "iblogs" text to 
+be in the center of the header */
+header {
+  background-color: #f4e5ce;
+  padding: 0.625em;
+  text-align: center;
+}
+
+/* sets all h1's to be in font Aboreto */
+h1 {
+  font-family: "Aboreto";
+}
+
+/* sets all body text to be in font montserrat 
+and changes bkg colour */
+body {
+  font-family: "Montserrat";
+  margin: 0;
+  padding: 0;
+  background-color: #f8f5ee;
+}
+
+/* moves footer text content to the center and changes 
+the bkg colour of the footer*/
+footer {
+  text-align: center;
+  padding: 1.25em;
+  background-color: #f4e5ce;
+  margin-top: auto;
+}
+
+.signup-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.firstname {
+  order: 1;
+  margin: 0.25em;
+  border-radius: 10px;
+  padding: 1em;
+}
+
+.lastname {
+  order: 2;
+  margin: 0.25em;
+  border-radius: 10px;
+  padding: 1em;
+}
+
+.email-input {
+  order: 3;
+  margin: 0.25em;
+  border-radius: 10px;
+  padding: 1em;
+}
+
+.username-input {
+  order: 4;
+  margin: 0.25em;
+  border-radius: 10px;
+  padding: 1em;
+}
+
+.password-input {
+  order: 5;
+  margin: 0.25em;
+  border-radius: 10px;
+  padding: 1em;
+}
+
+.confirm-password-input {
+  order: 6;
+  border-radius: 10px;
+  padding: 1em;
+  margin: 0.25em;
+  margin-bottom: 20px;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.signup-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5em;
+}
+
+.login {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5em;
+}
+
+.terms {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5em;
+}
+
+button {
+  border-color: #e8dbc7;
+  border-radius: 10px;
+  background-color: #e8dbc7;
+  padding: 10px 20px;
+  margin: 2px;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  font-size: 1em;
+}
+
+button:hover {
+  background-color: #d2c1ab;
+}
+
+.signup-button {
+  margin-top: -10px;
+}
+
+@media only screen and (max-width: 600px) {  
+  
+}
