@@ -1,3 +1,7 @@
+<?php
+    // start the session
+    session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -43,8 +47,6 @@
                 </span>
 
                 <?php
-                    // start the session
-                    session_start();
                     // check to see if the session array is set
                     if(isset($_SESSION['loginErrors'])){
                         // iterate through the errors 
