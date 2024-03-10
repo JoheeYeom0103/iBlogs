@@ -14,6 +14,7 @@
 
   <!-- scripts -->
   <script src="script/signupPage.js"></script>
+  <?php include("php/signupAction.php"); ?>
   <!-- scripts -->
 </head>
 
@@ -24,7 +25,7 @@
 
   <section id="signupsection">
     <h3>Sign Up</h3>
-    <form id="signUpForm" action="http://www.randyconnolly.com/tests/process.php" method="post">
+    <form id="signUpForm" action="php/signupAction.php" method="post">
       <div class="signup-container">
 
         <input class="firstname-input" type="text" name="firstname" placeholder="First Name">
