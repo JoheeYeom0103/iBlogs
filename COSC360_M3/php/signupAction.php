@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // add db connection here
 
@@ -14,18 +16,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if(empty($errors)){
         // this is where we would save to DB
         // also we would probably change this redirect url to be
-        // header("Location: ../explore.php?username=$username");
-        header("Location: ../explore.php");
+        // header("Location: ../AccountPage.php?username=$username");
+        header("Location: ../AccountPage.php");
     }else{
-        for($i = 0; $i < count($errors); $i++){
-            echo "".$errors[$i]."";
-        }
+        // if there are errors, send the user back to the signup page 
+        header("Location: ../signupPage.php");
     }
 
 }
 
 // function to validate the signup information
 function validateSignup($firstname, $lastname, $email, $username, $password, $confirmPass){
+    // Initialize array
+    $errors = array(); 
+   
     // Validate last name
     if(empty($lastname)){
         $errors[] = "Last name is required.";
@@ -58,6 +62,10 @@ function validateSignup($firstname, $lastname, $email, $username, $password, $co
     } elseif($confirmPass != $password){
         $errors[] = "Passwords do not match.";
     }
+    
+    // store in a session array so that we can display the 
+    // errors on the signup page
+    $_SESSION['loginErrors'] = $errors;
 
     return $errors;
 

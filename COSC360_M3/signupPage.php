@@ -5,9 +5,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Sign Up</title>
+
+  <!-- stylesheets -->
   <link rel="stylesheet" href="css/signupPage.css">
   <link rel="stylesheet" href="css/headerfooter.css">
-  <!-- stylesheets -->
+  <link rel="stylesheet" href="css/phpErrorMessageStyling.css">
   <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Aboreto" rel="stylesheet">
   <!-- stylesheets -->
@@ -64,6 +66,21 @@
           <span class="tooltip-message">Please confirm your password and ensure that it matches what you've previously
             typed</span>
         </span>
+
+        <?php
+
+          // php code to display stored error messages
+          if(isset($_SESSION['loginErrors'])){
+            // iterate through the errors 
+            foreach($_SESSION['loginErrors'] as $error){
+                // echo the error(s) to the screen under the confirm pass field
+                echo "<p class='error-message'>$error</p>";
+            }
+            // After errors are displayed unset the session array
+            unset($_SESSION["loginErrors"]);
+          }
+
+        ?>
 
         <div class="terms">
           <input class="terms-checkbox" type="checkbox" required>
