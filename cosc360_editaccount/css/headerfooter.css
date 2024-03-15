@@ -1,0 +1,50 @@
+body {
+    margin: 0;
+    background-color: #F8F5EE;
+    font-family: Montserrat;
+    color: #443829;
+}
+
+
+header {
+    font-family: Aboreto;
+    font-weight: bold;
+    background-color: #f4e5ce;
+    padding: 10px;
+    text-align: center;
+}
+
+/* styles the menu for the login and sign up buttons
+on the RHS with no bullet points */
+nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: right;
+}
+
+/* moves the menu with the login and sign up buttons to the right by
+15 pixels */
+nav li {
+    margin-right: 15px;
+}
+
+/* sets the menu items login and sign up to be black font */
+nav a{
+    color:black;
+}
+
+/* removes the underline from the menu links when visited, 
+hovered over, or active */
+nav a:link, a:visited, a:hover, a:active { 
+    text-decoration: none; 
+} 
+
+/* moves footer text content to the center and changes 
+the bkg colour of the footer*/
+footer {
+    font-family: Aboreto;
+    font-size: 0.9em;
+    text-align: center;
+    padding: 1.3em;
+    background-color: #f4e5ce;
+}
