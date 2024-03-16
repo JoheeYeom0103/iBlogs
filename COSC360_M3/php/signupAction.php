@@ -30,6 +30,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Execute the prepared statement
         mysqli_stmt_execute($stmt);
 
+        $_SESSION['username'] = $username;
+
         header("Location: ../AccountPage.php");
 
     }else{
