@@ -21,7 +21,7 @@
 
 <body>
     <header>
-        <h1><a href="explore.html" style="text-decoration: none; color: #362204;">iBlogs</a></h1>
+        <h1><a href="explore.php" style="text-decoration: none; color: #362204;">iBlogs</a></h1>
     </header>
 
     <section id="loginsection">
@@ -57,10 +57,10 @@
     <section>
         <p id="not-a-user">Don't have an account with us?</p>
         <div class="signup-guest">
-            <a href="signupPage.html">
+            <a href="signupPage.php">
                 <button class="signup-button" id="signup-button">Sign Up</button>
             </a>
-            <a href="explore.html">
+            <a href="explore.php">
                 <button class="guest-button">Continue as guest</button>
             </a>
         </div>

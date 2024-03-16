@@ -96,7 +96,7 @@
   <section>
     <div class="loginBox">
       <p>Already have an account?</p>
-        <a href="loginPage.html">
+        <a href="loginPage.php">
           <button class="login-button">Log In</button>
         </a>
     </div>

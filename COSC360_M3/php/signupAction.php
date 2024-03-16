@@ -1,4 +1,7 @@
 <?php
+
+include("dbConnect.php");
+
 session_start();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -11,19 +14,34 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = $_POST["password"];
     $confirmPass = $_POST["confirmPass"];
 
+    $hashedPass = md5($password);
+
     $errors = validateSignup($firstname, $lastname, $email, $username, $password, $confirmPass);
 
     if(empty($errors)){
-        // this is where we would save to DB
         // also we would probably change this redirect url to be
         // header("Location: ../AccountPage.php?username=$username");
+        $sql = "INSERT INTO member (Username, FirstName, LastName, Email, Password) VALUES(?,?,?,?,?)";
+        // use prepared statement
+        $stmt =  mysqli_prepare($connection, $sql);
+        // Bind parameters to the query
+        mysqli_stmt_bind_param($stmt, "sssss", $username, $firstname, $lastname, $email, $hashedPass);
+
+        // Execute the prepared statement
+        mysqli_stmt_execute($stmt);
+
         header("Location: ../AccountPage.php");
+
     }else{
         // if there are errors, send the user back to the signup page 
         header("Location: ../signupPage.php");
     }
 
+    mysqli_stmt_close($stmt);
+
 }
+
+mysqli_close($connection);
 
 // function to validate the signup information
 function validateSignup($firstname, $lastname, $email, $username, $password, $confirmPass){
@@ -38,7 +56,7 @@ function validateSignup($firstname, $lastname, $email, $username, $password, $co
     // Validate email
     if(empty($email)){
         $errors[] = "Email is required.";
-    } elseif(!filter_var($email, FILTER_VALIDATE_EMAIL)){
+    } else if(validateEmail($email)==false){
         $errors[] = "Invalid email format.";
     }
 
@@ -69,4 +87,10 @@ function validateSignup($firstname, $lastname, $email, $username, $password, $co
 
     return $errors;
 
+}
+
+function validateEmail($email) {
+    // Creates pattern: something@something.something
+    $emailPattern = '/^[^\s@]+@[^\s@]+\.[^\s@]+$/';
+    return preg_match($emailPattern, $email);
 }
