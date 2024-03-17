@@ -27,7 +27,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // check to see if we return ONE result from the query
         if(mysqli_num_rows($result) == 1){
             $row = mysqli_fetch_assoc($result);
-            $dbPass = $row["password"];
+            $dbPass = $row["Password"];
+
             // check to see if the pass matches
             if($hashedPass === $dbPass) {
                 // set the session for the user
@@ -64,9 +65,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
          header("Location: ../loginPage.php");
          exit();
     }
+    
         
-        // end the prepared statement
-        mysqli_stmt_close($stmt);
     }
 
 
