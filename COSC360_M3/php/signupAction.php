@@ -19,28 +19,53 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $errors = validateSignup($firstname, $lastname, $email, $username, $password, $confirmPass);
 
     if(empty($errors)){
-        // also we would probably change this redirect url to be
-        // header("Location: ../AccountPage.php?username=$username");
-        $sql = "INSERT INTO member (Username, FirstName, LastName, Email, Password) VALUES(?,?,?,?,?)";
-        // use prepared statement
-        $stmt =  mysqli_prepare($connection, $sql);
-        // Bind parameters to the query
-        mysqli_stmt_bind_param($stmt, "sssss", $username, $firstname, $lastname, $email, $hashedPass);
 
-        // Execute the prepared statement
-        mysqli_stmt_execute($stmt);
+        $initSql = "SELECT Username, Email FROM member";
+        $results = mysqli_query($connection, $initSql);
+        // setup empty array to store user data fetched from the DB
+        $userData = array();
 
-        $_SESSION['username'] = $username;
+        //and fetch results
+        while ($row = mysqli_fetch_assoc($results))
+        {
+            $userData[] = array('username' => $row['Username'], 'email' => $row['Email']);
+        }
 
-        header("Location: ../AccountPage.php");
+        // variable to check if user exists
+        $userExists = false;
+        for($i = 0; $i < count($userData); $i++){
+            if($userData[$i]['username'] === $username || $userData[$i]['email'] === $email){
+                $userExists = true;
+                break;
+            }
+        }
 
+        if($userExists === true){
+            $errors[] = "<p> User already exists with this name and/or email </p>";
+            $_SESSION['loginErrors'] = $errors;
+            header("Location: ../signupPage.php");
+
+        } else {
+            // also we would probably change this redirect url to be
+            // header("Location: ../AccountPage.php?username=$username");
+            $InsertSql = "INSERT INTO member (Username, FirstName, LastName, Email, Password) VALUES(?,?,?,?,?)";
+            // use prepared statement
+            $stmt =  mysqli_prepare($connection, $InsertSql);
+            // Bind parameters to the query
+            mysqli_stmt_bind_param($stmt, "sssss", $username, $firstname, $lastname, $email, $hashedPass);
+
+            // Execute the prepared statement
+            mysqli_stmt_execute($stmt);
+
+            $_SESSION['username'] = $username;
+
+            header("Location: ../AccountPage.php");
+            mysqli_stmt_close($stmt);
+        }
     }else{
         // if there are errors, send the user back to the signup page 
         header("Location: ../signupPage.php");
     }
-
-    mysqli_stmt_close($stmt);
-
 }
 
 mysqli_close($connection);
