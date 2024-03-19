@@ -5,22 +5,21 @@ include("dbConnect.php");
 session_start();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // add db connection here
 
     $firstname = $_POST["firstname"];
     $lastname = $_POST["lastname"];
     $email = $_POST["email"];
-    $username = $_POST["username"];
+    $userid = $_POST["username"];
     $password = $_POST["password"];
     $confirmPass = $_POST["confirmPass"];
 
     $hashedPass = md5($password);
 
-    $errors = validateSignup($firstname, $lastname, $email, $username, $password, $confirmPass);
+    $errors = validateSignup($firstname, $lastname, $email, $userid, $password, $confirmPass);
 
     if(empty($errors)){
 
-        $initSql = "SELECT Username, Email FROM member";
+        $initSql = "SELECT UserId, Email FROM user";
         $results = mysqli_query($connection, $initSql);
         // setup empty array to store user data fetched from the DB
         $userData = array();
@@ -28,13 +27,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         //and fetch results
         while ($row = mysqli_fetch_assoc($results))
         {
-            $userData[] = array('username' => $row['Username'], 'email' => $row['Email']);
+            $userData[] = array('userId' => $row['UserId'], 'email' => $row['Email']);
         }
 
         // variable to check if user exists
         $userExists = false;
         for($i = 0; $i < count($userData); $i++){
-            if($userData[$i]['username'] === $username || $userData[$i]['email'] === $email){
+            if($userData[$i]['userId'] === $userid || $userData[$i]['email'] === $email){
                 $userExists = true;
                 break;
             }
@@ -48,18 +47,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         } else {
             // also we would probably change this redirect url to be
             // header("Location: ../AccountPage.php?username=$username");
-            $InsertSql = "INSERT INTO member (Username, FirstName, LastName, Email, Password) VALUES(?,?,?,?,?)";
+            $InsertSql = "INSERT INTO user (UserId, FirstName, LastName, Email, Password) VALUES(?,?,?,?,?)";
             // use prepared statement
             $stmt =  mysqli_prepare($connection, $InsertSql);
             // Bind parameters to the query
-            mysqli_stmt_bind_param($stmt, "sssss", $username, $firstname, $lastname, $email, $hashedPass);
+            mysqli_stmt_bind_param($stmt, "sssss", $userid, $firstname, $lastname, $email, $hashedPass);
 
             // Execute the prepared statement
             mysqli_stmt_execute($stmt);
 
-            $_SESSION['username'] = $username;
+            $_SESSION['userId'] = $userid;
 
-            header("Location: ../AccountPage.php");
+            header("Location: ../CategoryPreferencesPage.php");
             mysqli_stmt_close($stmt);
         }
     }else{
