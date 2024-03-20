@@ -65,14 +65,6 @@
     </section>
 
     <section>
-        <div class="forgotPass">
-            <a href="#">
-                <button class="forgot-password-button">Forgot Password?</button>
-            </a>
-        </div>
-    </section>
-
-    <section>
         <p id="not-a-user">Don't have an account with us?</p>
         <div class="signup-guest">
             <a href="signupPage.php">
