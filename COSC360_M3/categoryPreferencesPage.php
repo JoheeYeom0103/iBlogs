@@ -12,6 +12,7 @@
 
     <!-- Scripts -->
     <script src="script/categorypreference.js"></script>
+    <?php include("php/categoryPreferenceAction.php"); ?>
     <!-- Scripts -->
 
 </head>
@@ -23,7 +24,7 @@
     <div id="text">
         <p>Please Select 6 Category Preferences:</p>
     </div>
-    <form id="categoryForm" method="post" action="cateogyPreferenceAction.php">
+    <form id="categoryForm" method="post" action="php/categoryPreferenceAction.php">
         <div class="category-container">
             <div class="category-preferences1">
                 <label for="technology-checkbox">Technology

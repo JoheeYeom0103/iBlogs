@@ -58,7 +58,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             $_SESSION['userId'] = $userid;
 
-            header("Location: ../CategoryPreferencesPage.php");
+            header("Location: ../categoryPreferencesPage.php");
             mysqli_stmt_close($stmt);
         }
     }else{
