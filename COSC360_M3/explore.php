@@ -25,8 +25,8 @@
       <h1>iBlogs</h1>
       <nav>
         <ul>
-          <li><a href="loginPage.html" class="menu">Log In</a></li>
-          <li><a href="signupPage.html" class="menu">Sign Up</a></li>
+          <li><a href="loginPage.php" class="menu">Log In</a></li>
+          <li><a href="signupPage.php" class="menu">Sign Up</a></li>
         </ul>
       </nav>
     </header>
