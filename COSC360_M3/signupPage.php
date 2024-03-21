@@ -22,7 +22,7 @@
 
 <body>
   <header>
-    <h1><a href="explore.html" style="text-decoration: none; color: #362204;">iBlogs</a></h1>
+    <h1>iBlogs</h1>
   </header>
 
   <section id="signupsection">

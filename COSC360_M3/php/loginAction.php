@@ -1,5 +1,4 @@
 <?php
-include("data.php");
 include("dbConnect.php");
 // start the session
 session_start();
@@ -7,18 +6,18 @@ session_start();
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // get input from the form
-    $username = $_POST["username"];
+    $userId = $_POST["username"];
     $password = $_POST["password"];
     $hashedPassword = trim(md5($password));
 
-    $errors = isEmptyLogin($username, $password);
+    $errors = isEmptyLogin($userId, $password);
 
     if(empty($errors)){
-        $sql = "SELECT * FROM member WHERE Username = ?";
+        $sql = "SELECT * FROM user WHERE UserId = ?";
         // use prepared statement
         $stmt =  mysqli_prepare($connection, $sql);
         // Bind parameters to the query
-        mysqli_stmt_bind_param($stmt, "s", $username);
+        mysqli_stmt_bind_param($stmt, "s", $userId);
 
         // Execute the prepared statement
         mysqli_stmt_execute($stmt);
@@ -32,7 +31,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $dbPass = trim($row["Password"]);
             if($hashedPassword === $dbPass){
                 // set the session for the user
-                $_SESSION['username'] = $username;
+                $_SESSION['userId'] = $userId;
                 // send to home page
                 header("Location: ../explore.php"); 
                 exit();

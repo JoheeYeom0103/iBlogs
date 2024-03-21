@@ -17,6 +17,7 @@ header {
     text-align: center;
 }
 
+
 /* styles the menu for the login and sign up buttons
 on the RHS with no bullet points */
 nav ul {
@@ -40,11 +41,9 @@ nav a {
 hovered over, or active */
 nav a:link,
 a:visited,
-a:hover,
 a:active {
     text-decoration: none;
 }
-
 /* moves footer text content to the center and changes 
 the bkg colour of the footer*/
 footer {
@@ -54,4 +53,12 @@ footer {
     padding: 1.3em;
     background-color: #f4e5ce;
     margin-top: auto;
+}
+
+.logoutButton{
+    font-family: 'Aboreto' !important;
+    font-weight: 900 !important;
+    border: none !important;
+    font-size: 1em !important;
+    background: none !important;
 }
