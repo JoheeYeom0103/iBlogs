@@ -12,8 +12,10 @@
     <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
     <link href='https://fonts.googleapis.com/css?family=Aboreto' rel='stylesheet'>
     <!--Font Files-->
+
     <!-- Scripts -->
     <script src="script/createPage.js"></script>
+    <?php include("php/createpageAction.php"); ?>
     <!-- Scripts -->
 
 </head>
@@ -24,22 +26,26 @@
         <h1>iBlogs</h1>
         <nav>
             <ul>
-                <li><a href="#" class="menu">Log In</a></li>
-                <li><a href="#" class="menu">Sign Up</a></li>
+            <li>
+              <form action="php/logoutAction.php" method="post">
+                <button class="logoutButton" type="submit" name="logout"> Log Out </button>
+              </form>
+            </li>
+            <li><a href="AccountPage.php" class="menu">@<?php echo $userId?></a></li>
             </ul>
 
         </nav>
     </header> 
 
     <div class="diary-container">
-        <form id="createPostForm" action="http://www.randyconnolly.com/tests/process.php" method="post">
+        <form id="createPostForm" action="php/createpageAction.php" method="post">
         
             <div class="header">
             <h2>February 5, 2024</h2>
             <hr class="line">
             <img src="images/title.svg" class="title-icon"/>
             <p class="inputHint">Title: </p>
-            <input type="text" name="title" class="inputLine"></input>
+            <input type="text" name="title" class="inputLine">
             <span class="tooltip-title">
                 <img src="images/helpIcon-01.svg" alt="Help Icon" class="help-icon">
                 <span class="tooltip-message">Please write a caption title for your post.</span>
@@ -86,7 +92,16 @@
             </span>
         </div>
         <div class="footer">
-            <button class="share-btn"><span class="buttonText">Share with</span></button>
+            
+        <?php 
+        if (isset($_SESSION['createPostErrors'])) {
+            $errors = $_SESSION['createPostErrors'];
+            foreach ($errors as $error) {
+                echo "<p class='error'>$error</p>";
+            }
+        }
+    ?>
+            <button class="share-btn" name="publicPost"><span class="buttonText">Share with</span></button>
                 <div class="share-options">
                 <button class="buttonText" name="publicPost">Public</button>
                 <button class="buttonText" name="privatePost">Private</button>

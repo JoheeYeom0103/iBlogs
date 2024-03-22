@@ -1,48 +1,19 @@
-/* changes the bkg colour of the header and sets the "iblogs" text to 
-be in the center of the header */
-/* header {
-    background-color: #f4e5ce;
-    padding: 0.625em;
-    text-align: center;
-} */
+/* Specify the width and padding for the search input */
+.greeting{
+    padding-left: 0.75em;
+}
 
-/* styles the menu for the login and sign up buttons
-on the RHS with no bullet points */
-/* nav ul {
-    list-style: none;
-    display: flex;
-    justify-content: right;
-} */
-
-/* moves the menu with the login and sign up buttons to the right*/
-/* nav li {
-    margin-right: 0.9375em;
-} */
-
-/* sets the menu items login and sign up to be black font */
-/* nav a{
-    color:black;
-} */
-
-/* removes the underline from the menu links when visited, 
-hovered over, or active */
-/* nav a:link, a:visited, a:hover, a:active { 
-    text-decoration: none; 
-}  */
-
-.mainSearch input{
+.mainSearch input[type="text"] {
     width: 93%;
     padding: 0.625em;
     border-radius: 0.625em;
-    border-width: 0.13em;
-    border-color:#000000;
-    background-color:#f8f5ee;
+    border: 1px solid #000000; /* Set border width and color */
+    background-color: #f8f5ee;
     font-family: 'Montserrat';
 }
 
-/* puts the search bar in a flex grid and moves it to the center,
-also adds padding from the header */
-.mainSearch{
+/* Display the search bar in a flex grid and move it to the center, add padding from the header */
+.mainSearch {
     display: flex;
     flex-wrap: wrap;
     justify-content: left;
@@ -50,17 +21,12 @@ also adds padding from the header */
     padding-left: 1em;
 }
 
-.greeting{
-    margin-left: 1em;
-}
-
-/* sets all h1's to be in font Aboreto */
-h1, h2{
+/* Ensure that all h1 and h2 elements use the 'Aboreto' font */
+h1, h2 {
     font-family: 'Aboreto';
 }
 
-/* sets all body text to be in font montserrat 
-and changes bkg colour */
+/* Ensure that all body text uses the 'Montserrat' font and set the background color */
 body {
     font-family: 'Montserrat';
     margin: 0;
@@ -68,9 +34,19 @@ body {
     background-color: #f8f5ee;
 }
 
-/* sets table to be 100% of the screen's width, aligns content to the left,
-and any overflowing content is set to scroll */
-table{
+/* Style for tables in the commentTable and postTable */
+.commentTable table,
+.commentTable th,
+.commentTable td,
+.postTable table,
+.postTable th,
+.postTable td {
+    background-color: #F9EDE2;
+    border: 1px solid #000;
+}
+
+/* Ensure that the table in the usersOnPlatform class is styled correctly */
+.usersOnPlatform table {
     width: 98%;
     text-align: left;
     margin-left: 1em;
@@ -78,45 +54,76 @@ table{
     overflow: none;
 }
 
-table tr[id="tableData"]:nth-child(even){
-    background-color:#f4e5ce;
+.usersOnPlatform table tr[id="tableData"] {
+    background-color: #f4e5ce;
 }
 
-table th{
+.usersOnPlatform table, .usersOnPlatform th {
     padding-bottom: 0.625em;
 }
 
-table tr[id="tableData"]:hover{
+.usersOnPlatform table tr[id="tableData"]:hover {
     background-color: #D3C1Ab;
 }
 
-table td{
+.usersOnPlatform table td {
     padding-top: 0.5em;
-    padding-bottom: 0.5em
+    padding-bottom: 0.5em;
 }
 
-/* moves footer text content to the center and changes 
-the bkg colour of the footer*/
+/* Set a fixed width for cells in comment and post tables */
+.commentTable table,
+.commentTable th,
+.commentTable td,
+.postTable table,
+.postTable th,
+.postTable td {
+    width: 50%; /* Adjust the width as needed */
+    padding: 8px; /* Add padding to the cells */
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+}
+
+
+/* Ensure that the footer text content is centered and set the background color */
 footer {
     text-align: center;
     padding: 1.25em;
     background-color: #f4e5ce;
 }
 
-/* ------------------------------------------------------------------ */
-
+/* Media query for mobile devices */
 @media only screen and (max-width: 600px) {
-    nav ul{
-        padding-right:1.75em;
+    /* Adjust padding for greeting */
+    .greeting {
+        padding-left: 0.5em; /* Adjust padding for mobile */
+    }
+
+    /* Adjust the width and padding for the search input on mobile */
+    .mainSearch input[type="text"] {
+        width: 80%; /* Adjust the width for mobile */
+        padding: 0.5em; /* Adjust padding for mobile */
+    }
+
+    /* Adjust padding for mainSearch */
+    .mainSearch {
+        padding-top: 1em; /* Adjust padding for mobile */
+        padding-left: 0.5em; /* Adjust padding for mobile */
+    }
+
+    /* Center the navigation items on mobile */
+    nav ul {
+        padding-right: 1em; /* Adjust padding for mobile */
         justify-content: center;
     }
 
-    /* Responsive search bar styles for mobile */
-    .mainSearch input {
-        width: 80%; /* Adjusting width for mobile */
+    /* Adjust the width of the table in usersOnPlatform for mobile */
+    .usersOnPlatform table {
+        width: 100%; /* Adjust width for mobile */
+        margin-left: 0; /* Remove margin for mobile */
     }
 
-    .mainSearch {
-        padding-top: 1.5em; /* Adjusting padding for mobile */
+    /* Adjust padding for table cells in usersOnPlatform for mobile */
+    .usersOnPlatform table td {
+        padding: 0.5em; /* Adjust padding for mobile */
     }
-}/* end media query for mobile */
+}

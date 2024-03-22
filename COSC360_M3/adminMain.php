@@ -12,6 +12,10 @@
     <meta content="width=device-width, initial-scale=1" name="viewport" />
     <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
     <link href='https://fonts.googleapis.com/css?family=Aboreto' rel='stylesheet'>
+
+    <script src="script/adminMainDelete.js"></script>
+    <?php include("php/logoutAction.php"); ?>
+
 </head>
 <body>
 
@@ -19,31 +23,33 @@
         <h1>iBlogs</h1>
         <nav>
             <ul>
-                <li><a href="#" class="menu">@Username</a></li>
-                <li><a href="#" class="menu">Sign Out</a></li>
+            <li>
+              <form action="php/logoutAction.php" method="post">
+                <button class="logoutButton" type="submit" name="logout"> Log Out </button>
+              </form>
+            </li>
+            <li><a href="AccountPage.php" class="menu">@<?php echo $userId ?></a></li>
+                
             </ul>
         </nav>
     </header>
 
     <div class="greeting">
-        <h2>Hello, Administrator @Username!</h2>
+        <h2>Hello, Administrator @<?php echo $userId ?> </h2>
     </div>
-
-    <div class="mainSearch">
-        <label><img src="images/SearchIcon-01.png" alt="Search Icon"></label>
-        <input type="text" placeholder="Search user history by username">
-    </div>
+    <form method="post" action="" id="mainForm">
+        <div class="mainSearch">
+            <label><img src="images/SearchIcon-01.png" alt="Search Icon"></label>
+            <input type="text" name="search" placeholder="Search user history by username">
+        
+        </div>
+    </form>
 
     <br>
 
     <div class="usersOnPlatform">
-        <table>
-            <tr><th>Username</th><th>Link to User History</th></tr>
-            <tr id="tableData"><td>@Username</td><td>View User History</td></tr>
-            <tr id="tableData"><td>@Username</td><td>View User History</td></tr>
-            <tr id="tableData"><td>@Username</td><td>View User History</td></tr>
-            <tr id="tableData"><td>@Username</td><td>View User History</td></tr>
-            <tr id="tableData"><td>@Username</td><td>View User History</td></tr>
+        <table>            
+            <?php include("php/adminDisplayUsers.php");?>
         </table>
     </div>
 

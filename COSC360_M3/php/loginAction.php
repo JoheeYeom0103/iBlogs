@@ -1,5 +1,4 @@
 <?php
-include("data.php");
 include("dbConnect.php");
 // start the session
 session_start();
@@ -7,17 +6,18 @@ session_start();
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // get input from the form
-    $username = $_POST["username"];
+    $userId = $_POST["username"];
     $password = $_POST["password"];
+    $hashedPassword = trim(md5($password));
 
-    $errors = isEmptyLogin($username, $password);
+    $errors = isEmptyLogin($userId, $password);
 
     if(empty($errors)){
-        $sql = "SELECT * FROM member WHERE Username = ? AND Password = ?";
+        $sql = "SELECT * FROM user WHERE UserId = ?";
         // use prepared statement
         $stmt =  mysqli_prepare($connection, $sql);
         // Bind parameters to the query
-        mysqli_stmt_bind_param($stmt, "ss", $username, $password);
+        mysqli_stmt_bind_param($stmt, "s", $userId);
 
         // Execute the prepared statement
         mysqli_stmt_execute($stmt);
@@ -27,11 +27,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         // check to see if we return ONE result from the query
         if(mysqli_num_rows($result) == 1){
-            // set the session for the user
-            $_SESSION['username'] = $username;
-            // send to home page
-            header("Location: ../explore.php"); 
-            exit();
+            $row = mysqli_fetch_assoc($result);
+            $dbPass = trim($row["Password"]);
+            if($hashedPassword === $dbPass){
+                // set the session for the user
+                $_SESSION['userId'] = $userId;
+                // send to home page
+                header("Location: ../explore.php"); 
+                exit();
+            }else{
+                $errors[] = "Password is incorrect";
+            }
         }else{
             // set the errors array to include a message about the invalid credentials
             $errors[] = "Username or password is incorrect";
