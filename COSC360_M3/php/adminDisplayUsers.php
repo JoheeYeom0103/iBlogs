@@ -56,26 +56,10 @@ if ($pstmt) {
             if(mysqli_num_rows($postResult) > 0) {
                 echo "<tr><td colspan='2'><table class='postTable'><tr><th>Post ID</th><th colspan=2>Content</th></tr>";
                 while ($postRow = mysqli_fetch_assoc($postResult)) {
-                    echo "<tr><td>" . $postRow['PostId'] . "</td><td>" . $postRow['Content'] . "</td><td><button id='delete' onclick='deleteRow(this)'>Delete</button></td></tr>";
+                    echo "<tr><td>" . $postRow['PostId'] . "</td><td>" . $postRow['Content'] . "</td><td><button id='delete' name='delete' onclick='deleteRow(this)'>Delete</button></td></tr>";
                 }
                 echo "</table></td></tr>";
             }
-
-
-            // below is the code for deleting a post, but it is not working properly
-            
-            // // if delete button is clicked, delete the post from the database 
-            // if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            //     if (isset($_POST['delete'])) {
-            //         $deletePostId = $_POST['delete'];
-            //         $deleteSql = "DELETE FROM post WHERE PostId = ?";
-            //         $deletePstmt = mysqli_prepare($connection, $deleteSql);
-            //         mysqli_stmt_bind_param($deletePstmt, "s", $deletePostId);
-            //         mysqli_stmt_execute($deletePstmt);
-            //     }
-            // }
-
-
 
 
             // Retrieve and display the user's comment information
@@ -88,12 +72,27 @@ if ($pstmt) {
             if(mysqli_num_rows($postResult) > 0) {
                 echo "<tr><td colspan='2'><table class='commentTable'><tr><th>Comment ID</th><th colspan=2>Content</th></tr>";
                 while ($postRow = mysqli_fetch_assoc($postResult)) {
-                    echo "<tr><td>" . $postRow['CommentId'] . "</td><td>" . $postRow['Content'] . "</td><td><button id='delete' onclick='deleteRow(this)'>Delete</button></td></tr>";
+                    echo "<tr><td>" . $postRow['CommentId'] . "</td><td>" . $postRow['Content'] . "</td><td><button id='delete' name='delete' onclick='deleteRow(this)'>Delete</button></td></tr>";
                 }
                 echo "</table></td></tr>";
             }
 
         }
+
+
+         // below is the code for deleting a post, but it is not working properly
+        // if delete button is clicked, delete the post from the database 
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            if (isset($_POST['delete'])) {
+                $deletePostId = $_POST['delete'];
+                $deleteSql = "DELETE FROM post WHERE PostId = ?";
+                $deletePstmt = mysqli_prepare($connection, $deleteSql);
+                mysqli_stmt_bind_param($deletePstmt, "s", $deletePostId);
+                mysqli_stmt_execute($deletePstmt);
+            }
+        }
+
+
     // No user found
     } else {
         echo "<tr><td colspan='2'><h4>User Not found :(</h4></td></tr>";
