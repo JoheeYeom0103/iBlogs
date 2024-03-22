@@ -12,10 +12,8 @@
     <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
     <link href='https://fonts.googleapis.com/css?family=Aboreto' rel='stylesheet'>
     <!--Font Files-->
-
     <!-- Scripts -->
     <script src="script/createPage.js"></script>
-    <?php include("php/createpageAction.php"); ?>
     <!-- Scripts -->
 
 </head>
@@ -34,14 +32,14 @@
     </header> 
 
     <div class="diary-container">
-        <form id="createPostForm" action="php/createpageAction.php" method="post">
+        <form id="createPostForm" action="http://www.randyconnolly.com/tests/process.php" method="post">
         
             <div class="header">
             <h2>February 5, 2024</h2>
             <hr class="line">
             <img src="images/title.svg" class="title-icon"/>
             <p class="inputHint">Title: </p>
-            <input type="text" name="title" class="inputLine">
+            <input type="text" name="title" class="inputLine"></input>
             <span class="tooltip-title">
                 <img src="images/helpIcon-01.svg" alt="Help Icon" class="help-icon">
                 <span class="tooltip-message">Please write a caption title for your post.</span>
@@ -88,7 +86,7 @@
             </span>
         </div>
         <div class="footer">
-            <button class="share-btn" name="publicPost"><span class="buttonText">Share with</span></button>
+            <button class="share-btn"><span class="buttonText">Share with</span></button>
                 <div class="share-options">
                 <button class="buttonText" name="publicPost">Public</button>
                 <button class="buttonText" name="privatePost">Private</button>
