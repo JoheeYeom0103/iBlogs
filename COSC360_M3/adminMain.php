@@ -28,22 +28,19 @@
     <div class="greeting">
         <h2>Hello, Administrator @Username!</h2>
     </div>
-
-    <div class="mainSearch">
-        <label><img src="images/SearchIcon-01.png" alt="Search Icon"></label>
-        <input type="text" placeholder="Search user history by username">
-    </div>
+    <form method="post" action="" id="mainForm">
+        <div class="mainSearch">
+            <label><img src="images/SearchIcon-01.png" alt="Search Icon"></label>
+            <input type="text" name="search" placeholder="Search user history by username">
+        
+        </div>
+    </form>
 
     <br>
 
     <div class="usersOnPlatform">
-        <table>
-            <tr><th>Username</th><th>Link to User History</th></tr>
-            <tr id="tableData"><td>@Username</td><td>View User History</td></tr>
-            <tr id="tableData"><td>@Username</td><td>View User History</td></tr>
-            <tr id="tableData"><td>@Username</td><td>View User History</td></tr>
-            <tr id="tableData"><td>@Username</td><td>View User History</td></tr>
-            <tr id="tableData"><td>@Username</td><td>View User History</td></tr>
+        <table>            
+            <?php include("php/adminDisplayUsers.php");?>
         </table>
     </div>
 
