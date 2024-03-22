@@ -88,6 +88,15 @@
             </span>
         </div>
         <div class="footer">
+            
+        <?php 
+        if (isset($_SESSION['createPostErrors'])) {
+            $errors = $_SESSION['createPostErrors'];
+            foreach ($errors as $error) {
+                echo "<p class='error'>$error</p>";
+            }
+        }
+    ?>
             <button class="share-btn" name="publicPost"><span class="buttonText">Share with</span></button>
                 <div class="share-options">
                 <button class="buttonText" name="publicPost">Public</button>
