@@ -29,8 +29,8 @@
     <div class="user-profile">
         <img src="images/usericon-01.svg" alt="User Icon">
         <p>User Name</p>
-        <a href="EditAccountPage.html"><button class="round-button">Edit Account</button></a>
-        <a href="CreatePage.html"><button class="round-button">Create Post</button></a>
+        <a href="EditAccountPage.php"><button class="round-button">Edit Account</button></a>
+        <a href="CreatePage.php"><button class="round-button">Create Post</button></a>
         <div class="calendar-container">
             <div class="calendar">
                 <div class="month">January 2024</div>

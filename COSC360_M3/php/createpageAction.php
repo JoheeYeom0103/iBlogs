@@ -1,6 +1,6 @@
 <?php
 
-require("dbConnectZ.php");
+require("dbConnect.php");
 
 session_start();
 

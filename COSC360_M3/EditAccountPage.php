@@ -1,9 +1,9 @@
 <?php
 // PHP code for database connection and form processing
 $host = "localhost";
-$database = "iblog";
-$user = "joy";
-$db_password = "joy5767";
+$database = "iBlogs";
+$user = "tatkg24";
+$db_password = "C0sc360!!";
 
 // Create connection
 $connection = mysqli_connect($host, $user, $db_password, $database);
@@ -23,7 +23,7 @@ $userIdClass = $firstNameClass = $lastNameClass = $passwordClass = $passwordConf
 
 // Hardcoded user ID assuming the user is logged in
 session_start();
-$old_userId = $SESSION_['userId'];
+$old_userId = isset($SESSION_['userId']) ? $SESSION_['userId']: 'jane_smith';
 
 // Fetch user details from the database
 $sql = "SELECT FirstName, LastName, Password, Email, ProfileImg FROM User WHERE UserId = ?";
@@ -242,8 +242,12 @@ if (isset($_FILES['profileImage']) && $_FILES['profileImage']['error'] === UPLOA
         <h1>iBlogs</h1>
         <nav>
             <ul>
-                <li><a href="loginPage.php" class="menu">Log In</a></li>
-                <li><a href="signup.php" class="menu">Sign Up</a></li>
+            <li>
+              <form action="php/logoutAction.php" method="post">
+                <button class="logoutButton" type="submit" name="logout"> Log Out </button>
+              </form>
+            </li>
+            <li><a href="AccountPage.php" class="menu">@<?php echo $old_userId?></a></li>
             </ul>
         </nav>
     </header> 
