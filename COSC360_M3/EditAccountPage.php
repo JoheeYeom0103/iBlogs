@@ -189,6 +189,7 @@ if (isset($_FILES['profileImage']) && $_FILES['profileImage']['error'] === UPLOA
     <title>Account Page</title>
     <link rel="stylesheet" href="css/headerfooter.css">
     <link rel="stylesheet" href="css/editAccount.css">
+    <script src="script/validation.js" ></script>
 
     <!-- Font Files -->
     <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
