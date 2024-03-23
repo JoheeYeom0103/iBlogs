@@ -1,3 +1,5 @@
+//TODO update this so that the table rows are deleted asynchronously
+
 const deleteButton = document.querySelector('button[id="delete"]');
 
 function deleteRow(btn) {
