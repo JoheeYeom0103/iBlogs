@@ -1,31 +1,18 @@
 <?php
-// PHP code for database connection and form processing
-$host = "localhost";
-$database = "iBlogs";
-$user = "tatkg24";
-$db_password = "C0sc360!!";
 
-// Create connection
-$connection = mysqli_connect($host, $user, $db_password, $database);
+include('php/dbConnect.php');
 
-// Error message
-$error = mysqli_connect_error();
-
-// If connection is not successful (If any error message exists)
-if ($error != null) {
-    $error_message = "Connection failed: " . mysqli_connect_error();
-    exit("<p>$error_message</p>");
-}
-
-// Initialize variables
+// Initialize old variables
 $old_userId = $old_firstname = $old_lastname = $old_password = $old_email = $old_img = "";
 $userIdClass = $firstNameClass = $lastNameClass = $passwordClass = $passwordConfirmationClass = $emailClass = "";
 
-// Hardcoded user ID assuming the user is logged in
+/******************************* SESSION *******************************/
 session_start();
-$old_userId = isset($SESSION_['userId']) ? $SESSION_['userId']: 'jane_smith';
+$old_userId = $_SESSION['userId'];
+// $old_userId = isset($_SESSION_['userId']) ? $SESSION_['userId'] : 'jane_smith';
+/******************************* SESSION *******************************/
 
-// Fetch user details from the database
+// Assign the old variables with data stored in the database
 $sql = "SELECT FirstName, LastName, Password, Email, ProfileImg FROM User WHERE UserId = ?";
 $pstmt = mysqli_prepare($connection, $sql);
 
@@ -42,6 +29,7 @@ if ($pstmt) {
     // Fetch values
     mysqli_stmt_fetch($pstmt);
 
+    // Close connection
     mysqli_stmt_close($pstmt);
 }
 
@@ -49,10 +37,10 @@ if ($pstmt) {
 function getInputValue($field) {
     global $old_userId, $old_firstname, $old_lastname, $old_password, $old_email;
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        // If the user submits, retrieve form data
+        // If the form has been submitted, return the submitted value
         return isset($_POST[$field]) ? $_POST[$field] : '';
     } else {
-        // If not submitted, return old values
+        // If the form has not been submitted, return previosly saved values
         switch ($field) {
             case 'userId':
                 return $old_userId;
@@ -72,7 +60,7 @@ function getInputValue($field) {
     }
 }
 
-// Function to validate field
+// Function to validate fields
 function isFieldValid($field, $value) {
     switch ($field) {
         case 'userId':
@@ -80,7 +68,6 @@ function isFieldValid($field, $value) {
         case 'password':
             return !(empty($value) || strlen($value) < 12 || strlen($value) > 14);
         case 'passwordConfirmation':
-            // Check if password and passwordConfirmation match
             return ($value == getInputValue('password'));
         case 'email':
             return !(empty($value) || strpos($value, '@') === false);
@@ -89,95 +76,8 @@ function isFieldValid($field, $value) {
     }
 }
 
-// Check if form is submitted
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    if (isset($_POST['submit'])) {
-        
-        // Validate form fields
-        $isValid = true;
-        $new_userId = getInputValue('userId');
-        $new_firstName = getInputValue('firstName');
-        $new_lastName = getInputValue('lastName');
-        $new_password = getInputValue('password');
-        $new_email = getInputValue('email');
 
-        // Validate each field
-        foreach ($_POST as $field => $value) {
-            if (!isFieldValid($field, $value)) {
-                $isValid = false;
-                break;
-            }
-        }
-
-        // If all fields are valid, update user data
-        if ($isValid) {
-            $updateSQL = "UPDATE User SET UserId=?, FirstName=?, LastName=?, Email=?, Password=? WHERE UserId=?";
-            $updatePstmt = mysqli_prepare($connection, $updateSQL);
-
-            if ($updatePstmt) {
-                mysqli_stmt_bind_param($updatePstmt, "ssssss", $new_userId, $new_firstName, $new_lastName, $new_email, $new_password, $old_userId);
-                $success = mysqli_stmt_execute($updatePstmt);
-
-                if ($success) {
-                    // Update old values with new ones
-                    $old_userId = $new_userId;
-                    $old_firstname = $new_firstName;
-                    $old_lastname = $new_lastName;
-                    $hashed_password = md5($new_password);
-                    $old_password = $hashed_password;
-                    $old_email = $new_email;
-                    echo "<script>alert('Changes have been successfully saved!')</script>";
-                } else {
-                    echo "<script>alert('Failed to save changes')</script>";
-                }
-
-                mysqli_stmt_close($updatePstmt);
-            }
-        } else {
-            // If not valid, show error message
-            echo "<script>alert('Correct the highlighted fields')</script>";
-        }
-    } else if (isset($_POST['cancel'])) {
-        // Redirect to a page after cancellation
-        header('Location: editaccountpage.php');
-        exit; 
-    }
-}
-
-if (isset($_FILES['profileImage']) && $_FILES['profileImage']['error'] === UPLOAD_ERR_OK) {
-    // Check if the file is an image
-    $file_type = mime_content_type($_FILES['profileImage']['tmp_name']);
-    if (strpos($file_type, 'image') !== false) {
-        // Define upload directory
-        $upload_dir = 'uploads/';
-        
-        // Generate unique file name
-        $file_name = uniqid('profile_img_') . '.' . pathinfo($_FILES['profileImage']['name'], PATHINFO_EXTENSION);
-        // Move the uploaded file to the upload directory
-        if (move_uploaded_file($_FILES['profileImage']['tmp_name'], $upload_dir . $file_name)) {
-            // Update database with new image path
-            $new_img = $upload_dir . $file_name;
-            $updateSQL = "UPDATE User SET ProfileImg=? WHERE UserId=?";
-            $updatePstmt = mysqli_prepare($connection, $updateSQL);
-            if ($updatePstmt) {
-                mysqli_stmt_bind_param($updatePstmt, "ss", $new_img, $old_userId);
-                $success = mysqli_stmt_execute($updatePstmt);
-                if ($success) {
-                    $old_img = $new_img;
-                } else {
-                    echo "<script>alert('Failed to save changes')</script>";
-                }
-                mysqli_stmt_close($updatePstmt);
-            }
-        } else {
-            echo "<script>alert('Failed to move uploaded file')</script>";
-        }
-    } else {
-        echo "<script>alert('Uploaded file is not an image')</script>";
-    }
-} else {
-    echo "<script>alert('No file uploaded or error occurred')</script>";
-}
+include('php/EditAccountPage_Action.php');
 
 ?>
 
@@ -187,38 +87,43 @@ if (isset($_FILES['profileImage']) && $_FILES['profileImage']['error'] === UPLOA
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Account Page</title>
+
+    <!-- External css & js -->
     <link rel="stylesheet" href="css/headerfooter.css">
-    <link rel="stylesheet" href="css/editAccount.css">
-    <script src="script/validation.js" ></script>
+    <link rel="stylesheet" href="css/EditAccountPage.css">
+    <script src="validation.js"></script>
+    <!-- External css & js -->
 
     <!-- Font Files -->
     <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
     <link href='https://fonts.googleapis.com/css?family=Aboreto' rel='stylesheet'>
     <!-- Font Files -->
+
+    <!-- Embeded script to deal with dynamic display of new image -->
     <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        // Get the file input element
-        var fileInput = document.getElementById("profileImage");
+
+        document.addEventListener("DOMContentLoaded", function() {
 
         var fileName = "";
-
-        // Get the image preview element
+        
+        // Input file button element
+        var fileInput = document.getElementById("changeImg");
+        // Image element
         var imgPreview = document.getElementById("profileImgPreview");
 
-        // Get the file name display element
-        var fileNameDisplay = document.getElementById("fileNameDisplay");
-
-        // Add event listener to file input element
+        // If the input file button is clicked
         fileInput.addEventListener("change", function() {
             // Check if a file is selected
             if (fileInput.files && fileInput.files[0]) {
-                var reader = new FileReader();
 
+                // Create a FileReader object
+                var reader = new FileReader();
+                // When the FileReader has successfully read the file contents
                 reader.onload = function(e) {
                     // Update the src attribute of the image preview element
                     imgPreview.src = e.target.result;
                     // Display the file name
-                     fileName= fileInput.files[0].name;
+                    fileName= fileInput.files[0].name;
                 };
 
                 // Read the selected file as a data URL
@@ -226,16 +131,9 @@ if (isset($_FILES['profileImage']) && $_FILES['profileImage']['error'] === UPLOA
             }
         });
 
-        // Add event listener to the change button
-        document.getElementById("changeBtn").addEventListener("click", function() {
-            // Trigger click event on the file input element
-            fileInput.click();
-        });
     });
     
     </script>
-
-
 </head>
 <body>
     <header>
@@ -247,23 +145,23 @@ if (isset($_FILES['profileImage']) && $_FILES['profileImage']['error'] === UPLOA
                 <button class="logoutButton" type="submit" name="logout"> Log Out </button>
               </form>
             </li>
-            <li><a href="AccountPage.php" class="menu">@<?php echo $old_userId?></a></li>
+            <li><a href="AccountPage.php" class="menu">@<?php echo $old_userId ?></a></li>
             </ul>
         </nav>
     </header> 
 
     <div id="profile-details">
         
-        <form method="post" action="" id="profile-img" class="user-profile" enctype="multipart/form-data">
+        <form method="post" action="" id="profile-form" class="user-profile" enctype="multipart/form-data">
             <h2>Edit Account</h2>
             <h3 class="profile-heading">Photo</h3>
             <!-- Add the "circular" class to the image tag -->
-            <img id="profileImgPreview" src="<?php echo $old_img !== '' ? $old_img : 'images/userIcon.svg'; ?>" alt="User Icon" class="circular">
-            <input type="file" name="profileImage" id="profileImage" style="display: none;">
-            <button type="button" name="changeImg" id="changeBtn">Change</button>
-        </form>
+            <img id="profileImgPreview" src="<?php echo $old_img !== '' ? './uploads/' . $old_img : 'images/userIcon.svg'; ?>" alt="User Icon" class="circular">
+            <label for="changeImg" class="file-upload-button">
+                Change
+                <input type="file" name="changeImg" id="changeImg">
+            </label>
 
-        <form method="post" action="" id="profile-form" class="user-profile">
             <div class="profile-field">
                 <label for="userId">User ID:</label>
                 <!-- userId -->
@@ -318,9 +216,10 @@ if (isset($_FILES['profileImage']) && $_FILES['profileImage']['error'] === UPLOA
 
 
             <div id="buttons">
-                <button type="submit" name="cancel" class="buttons">Cancel</button>
+                <button type="button" class="buttons" name = 'cancel' onclick="window.location.href='editaccountpage.php'">Cancel</button>
                 <button type="submit" class="buttons" name="submit">Save</button>
             </div>
+
         </form>
 
     </div>

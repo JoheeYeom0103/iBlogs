@@ -13,31 +13,43 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $errors = isEmptyLogin($userId, $password);
 
     if(empty($errors)){
-        // Update the SQL query to use a direct query
-        $sql = "SELECT * FROM user WHERE UserId IN (SELECT UserId FROM administrator)";
+        // Update the SQL query to check if the user is an administrator
+        $sql = "SELECT * FROM user u INNER JOIN administrator a ON u.UserId = a.AdminId WHERE u.UserId = ?";
+        $pstmt = mysqli_prepare($connection, $sql);
 
-        // Execute the SQL query
-        $result = mysqli_query($connection, $sql);
+        if ($pstmt) {
+            // Bind parameters to the prepared statement
+            mysqli_stmt_bind_param($pstmt, 's', $userId);
 
-        // Check if the query was successful
-        if ($result) {
-            // Process the result
-            if(mysqli_num_rows($result) == 1){
-                $row = mysqli_fetch_assoc($result);
-                $dbPass = trim($row["Password"]);
-                if($hashedPassword === $dbPass){
-                    // set the session for the user
+            // Execute the prepared statement
+            mysqli_stmt_execute($pstmt);
+
+            // Get result
+            $result = mysqli_stmt_get_result($pstmt);
+
+            // Fetch the row
+            $row = mysqli_fetch_assoc($result);
+
+            // Check if the query returned a row
+            if ($row) {
+                // Check if the password matches
+                if (trim($row['Password']) === $hashedPassword) {
+                    // User is an administrator, set the session for the user
                     $_SESSION['userId'] = $userId;
-                    // send to home page
+                    // Redirect to the admin main page
                     header("Location: ../adminMain.php"); 
                     exit();
-                }else{
-                    $errors[] = "Password is incorrect";
+                } else {
+                    // Password is incorrect, show an error message
+                    $errors[] = "Password is incorrect.";
                 }
-            }else{
-                // set the errors array to include a message about the invalid credentials
-                $errors[] = "Username or password is incorrect";
+            } else {
+                // Not an administrator, show an error message
+                $errors[] = "You are not authorized to access this page.";
             }
+
+            // Close the prepared statement
+            mysqli_stmt_close($pstmt);
         } else {
             // Handle the query error
             $errors[] = "Database query error: " . mysqli_error($connection);
@@ -68,4 +80,3 @@ function isEmptyLogin($username, $password){
 
     return $errors;
 }
-?>
