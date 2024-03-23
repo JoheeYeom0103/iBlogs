@@ -54,11 +54,31 @@ if ($pstmt) {
             $postResult = mysqli_stmt_get_result($postPstmt);
 
             if(mysqli_num_rows($postResult) > 0) {
+                // echo "<tr><td colspan='2'><table class='postTable'><tr><th>Post ID</th><th colspan=2>Content</th></tr>";
+                // while ($postRow = mysqli_fetch_assoc($postResult)) {
+                //     echo "<tr><td>" . $postRow['PostId'] . "</td><td>" . $postRow['Content'] . "</td><td><button id='delete' name='delete' onclick='deleteRow(this)'>Delete</button></td></tr>";
+                // }
+                // echo "</table></td></tr>";
+
                 echo "<tr><td colspan='2'><table class='postTable'><tr><th>Post ID</th><th colspan=2>Content</th></tr>";
                 while ($postRow = mysqli_fetch_assoc($postResult)) {
-                    echo "<tr><td>" . $postRow['PostId'] . "</td><td>" . $postRow['Content'] . "</td><td><button id='delete' name='delete' onclick='deleteRow(this)'>Delete</button></td></tr>";
+
+                    
+                    echo "<tr><td>" . $postRow['PostId'] . "</td><td>" . $postRow['Content'] . "</td><td>
+                    <form class='deleteForm' id='deleteForm" . $postRow['PostId'] . "' method='post' action='".$_SERVER["PHP_SELF"]."'>
+                    <input type='hidden' name='delete' value='" . $postRow['PostId'] . "'>
+                    <button type='submit'>Delete</button>
+                    </form></td></tr>";
+
+                    // echo "<tr><td>" . $postRow['PostId'] . "</td><td>" . $postRow['Content'] . "</td><td>
+                    // <button type='button' onclick='deletePost(" . $postRow['PostId'] . ")'>Delete</button>
+                    // </td></tr>";
+
+                    
+
+                    
+                    
                 }
-                echo "</table></td></tr>";
             }
 
 
@@ -80,17 +100,36 @@ if ($pstmt) {
         }
 
 
-         // below is the code for deleting a post, but it is not working properly
-        // if delete button is clicked, delete the post from the database 
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            if (isset($_POST['delete'])) {
-                $deletePostId = $_POST['delete'];
-                $deleteSql = "DELETE FROM post WHERE PostId = ?";
-                $deletePstmt = mysqli_prepare($connection, $deleteSql);
-                mysqli_stmt_bind_param($deletePstmt, "s", $deletePostId);
-                mysqli_stmt_execute($deletePstmt);
+        // below is for Deleting post
+
+        // if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit_delete'])) {
+        //     if (isset($_POST['delete'])) {
+        //         $deletePostId = $_POST['delete'];
+        //         $deleteSql = "DELETE FROM post WHERE PostId = ?";
+        //         $deletePstmt = mysqli_prepare($connection, $deleteSql);
+        //         mysqli_stmt_bind_param($deletePstmt, "s", $deletePostId);
+        //         if (mysqli_stmt_execute($deletePstmt)) {
+        //             echo "Post deleted successfully.";
+        //         } else {
+        //             echo "Error deleting post: " . mysqli_error($connection);
+        //         }
+        //     }
+        // }
+
+
+        if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['delete'])) {
+            $deletePostId = $_POST['delete'];
+            $deleteSql = "DELETE FROM post WHERE PostId = ?";
+            $deletePstmt = mysqli_prepare($connection, $deleteSql);
+            mysqli_stmt_bind_param($deletePstmt, "s", $deletePostId);
+            if (mysqli_stmt_execute($deletePstmt)) {
+                echo "Post deleted successfully.";
+            } else {
+                echo "Error deleting post: " . mysqli_error($connection);
             }
+            exit; // Exit to prevent further processing
         }
+        
 
 
     // No user found
