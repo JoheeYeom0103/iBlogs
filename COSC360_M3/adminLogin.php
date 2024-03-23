@@ -31,7 +31,7 @@
 
     <section id="loginsection">
         <h3>Login</h3>
-        <form id="loginForm" action="php/loginAction.php" method="post">
+        <form id="loginForm" action="php/adminLoginAction.php" method="post">
             <div class="login-container">
 
                 <input class="username-input" type="text" name="username" placeholder="username">
@@ -65,16 +65,9 @@
     </section>
 
     <section>
-        <p id="not-a-user">Don't have an account with us?</p>
         <div class="signup-guest">
-            <a href="signupPage.php">
-                <button class="signup-button" id="signup-button">Sign Up</button>
-            </a>
-            <a href="php/guestAction.php">
-                <button class="guest-button" type="submit">Continue as guest</button>
-            </a>
-            <a href="adminLogin.php">
-                <button class="adminLogin-button" type="submit">Continue as Admin</button>
+            <a href="loginPage.php">
+                <button class="signup-button" id="signup-button">Go Back</button>
             </a>
         </div>
     </section>

@@ -1,6 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <?php 
+        session_start();
+        $userId = $_SESSION['userId'];
+        include("php/logoutAction.php");
+    ?>
+
     <meta charset="UTF-8">
     <title>Admin Main page</title>
     
@@ -14,7 +20,6 @@
     <link href='https://fonts.googleapis.com/css?family=Aboreto' rel='stylesheet'>
 
     <script src="script/adminMainDelete.js"></script>
-    <?php include("php/logoutAction.php"); ?>
 
 </head>
 <body>
