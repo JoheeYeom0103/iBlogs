@@ -2,6 +2,7 @@
 include("php/dbConnectZ.php");
 
 
+
 session_start();
 
 $userId = $_SESSION['userId'];
@@ -124,6 +125,7 @@ if ($pstmt) {
             mysqli_stmt_bind_param($deletePstmt, "s", $deletePostId);
             if (mysqli_stmt_execute($deletePstmt)) {
                 echo "Post deleted successfully.";
+                header("Refresh:0; url=adminMain.php");
             } else {
                 echo "Error deleting post: " . mysqli_error($connection);
             }
