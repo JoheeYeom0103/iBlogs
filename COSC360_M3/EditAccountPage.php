@@ -156,7 +156,8 @@ include('php/EditAccountPage_Action.php');
             <h2>Edit Account</h2>
             <h3 class="profile-heading">Photo</h3>
             <!-- Add the "circular" class to the image tag -->
-            <img id="profileImgPreview" src="<?php echo $old_img !== '' ? './uploads/' . $old_img : 'images/userIcon.svg'; ?>" alt="User Icon" class="circular">
+            <!-- removed uploads file path from here -->
+            <img id="profileImgPreview" src="<?php echo $old_img !== '' ? $old_img : 'images/userIcon.svg'; ?>" alt="User Icon" class="circular">
             <label for="changeImg" class="file-upload-button">
                 Change
                 <input type="file" name="changeImg" id="changeImg">
@@ -231,7 +232,7 @@ include('php/EditAccountPage_Action.php');
         <p>
             <img src="images/twitter.png" alt="Twitter" width="30">
             <img src="images/facebook.png" alt="Facebook" width="30">       
-            <img src="images/instagram.png" alt="Instagram" width="30">
+            <img src="images/insta.png" alt="Instagram" width="30">
         </p>
     </footer>
 
