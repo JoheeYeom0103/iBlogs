@@ -3,7 +3,12 @@
 <head>
     <?php 
         session_start();
-        $userId = $_SESSION['userId'];
+
+        if (isset($_SESSION["userId"])){
+            $userId = $_SESSION['userId'];
+        }else{
+            header("Location: adminLogin.php");
+        }
         include("php/logoutAction.php");
     ?>
 
@@ -19,6 +24,7 @@
     <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
     <link href='https://fonts.googleapis.com/css?family=Aboreto' rel='stylesheet'>
 
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="script/adminMainDelete.js"></script>
 
 </head>
@@ -63,7 +69,7 @@
         <p id="footerPhoneNum">778-123-4567</p>
         <p id="footerEmail">iblogs@blogger.com</p>
         <p>
-            <img src="images/twitter (1).png" alt="Twitter" width="30">
+            <img src="images/twitter.png" alt="Twitter" width="30">
             <img src="images/facebook.png" alt="Facebook" width="30">       
             <img src="images/insta.png" alt="Instagram" width="30">
         </p>
