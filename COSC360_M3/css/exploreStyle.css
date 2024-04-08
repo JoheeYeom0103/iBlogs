@@ -17,6 +17,14 @@ also adds padding from the header */
     padding-top: 2.5em;
 } */
 
+#postURL{
+    color:#000;
+}
+
+#postURL:hover{
+    color:#D3C1AB;
+}
+
 .mainSearch input{
     width: 60%;
     padding: 0.5em;
@@ -121,6 +129,10 @@ section#userPostSection{
     padding: 10px; /* Updated padding */
     margin-bottom: 20px;
     background-color: #F9EDE2;
+}
+
+.userPosts:hover{
+    background-color: #F8F5EE;
 }
 
 .interestContainer {

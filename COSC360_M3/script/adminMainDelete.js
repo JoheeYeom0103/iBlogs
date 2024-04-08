@@ -1,15 +1,54 @@
 //TODO update this so that the table rows are deleted asynchronously
 
-const deleteButton = document.querySelector('button[id="delete"]');
+$(document).ready(function() {
+  $('.deleteForm').submit(function(event) {
+      event.preventDefault(); // Prevent default form submission
 
-function deleteRow(btn) {
-  // Get the row to be deleted
-  var row = btn.parentNode.parentNode;
-  // Ensure that there's at least one row left in the table
-  if (row.parentNode.rows.length > 1) {
-    // Remove the row from the table
-    row.parentNode.removeChild(row);
-  } else {
-    alert("Cannot delete the last row!");
-  }
-}
+      var form = $(this);
+      var postUrl = form.attr('action');
+      var postData = form.serialize(); // Serialize form data for AJAX
+
+      $.ajax({
+          type: 'POST',
+          url: postUrl,
+          data: postData,
+          success: function(response) {
+              // Update the table or display a success message
+              console.log(response);
+              form.closest('tr').remove(); // Remove the deleted row from the table
+          },
+          error: function(xhr, status, error) {
+              console.error(xhr.responseText);
+              alert('Error deleting post. Please try again.');
+          }
+      });
+  });
+});
+
+$(document).ready(function() {
+  $('.deleteCommentForm').submit(function(event) {
+      event.preventDefault(); // Prevent default form submission
+
+      var form = $(this);
+      var postUrl = form.attr('action');
+      var postData = form.serialize(); // Serialize form data for AJAX
+
+      $.ajax({
+          type: 'POST',
+          url: postUrl,
+          data: postData,
+          success: function(response) {
+              // Update the table or display a success message
+              console.log(response);
+              form.closest('tr').remove(); // Remove the deleted row from the table
+          },
+          error: function(xhr, status, error) {
+              console.error(xhr.responseText);
+              alert('Error deleting comment. Please try again.');
+          }
+      });
+  });
+});
+
+
+
