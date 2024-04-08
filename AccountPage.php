@@ -4,60 +4,54 @@
 
     include('dbConnection.php');
 
-    /******************************* SESSION *******************************/
+    /* TODO: Remove jane_smith once connected with login page */
     session_start();
     $userId = isset($_SESSION['userId']) ? $_SESSION['userId'] : 'jane_smith';
-    $profileImg = ''; // Initialize $profileImg to avoid PHP notice
-    /******************************* SESSION *******************************/
-
-    // Assign the old variables with data stored in the database
+    $profileImg = ''; 
+  
+    // Retrieve image from database
     $imgSql = "SELECT ProfileImg FROM User WHERE UserId = ?";
     $imgPstmt = mysqli_prepare($connection, $imgSql);
 
     if ($imgPstmt) {
-        // Bind parameters to the prepared statement
         mysqli_stmt_bind_param($imgPstmt, "s", $userId);
 
-        // Execute the prepared statement
         mysqli_stmt_execute($imgPstmt);
 
-        // Bind result variables
         mysqli_stmt_bind_result($imgPstmt, $profileImg);
 
-        // Fetch values
         mysqli_stmt_fetch($imgPstmt);
 
-        // Close connection
         mysqli_stmt_close($imgPstmt);
     }
 
-    $postSql = "SELECT Date(DateOfPost), Title, Category, ShareOption FROM Post WHERE UserId = ?";
+    // Retrieve posts from database
+    $postSql = "SELECT PostID, Date(DateOfPost), Title, Category, ShareOption FROM Post WHERE UserId = ?";
     $postPstmt = mysqli_prepare($connection, $postSql);
 
     if ($postPstmt) {
-        // Bind parameters to the prepared statement
+        
         mysqli_stmt_bind_param($postPstmt, "s", $userId);
 
-        // Execute the prepared statement
         mysqli_stmt_execute($postPstmt);
 
-        // Bind result variables
-        mysqli_stmt_bind_result($postPstmt, $postDate, $title, $category, $shareOption);
+        mysqli_stmt_bind_result($postPstmt, $postId, $postDate, $title, $category, $shareOption);
 
-        // Create arrays to hold public and private posts
+        // Check the share option and assign each data to an appropriate array
         $publicPosts = [];
         $privatePosts = [];
 
         while (mysqli_stmt_fetch($postPstmt)) {
-            // Check the share option and assign to appropriate array
             if ($shareOption === 'Public') {
                 $publicPosts[] = [
+                    'PostId' => $postId,
                     'PostDate' => $postDate,
                     'Title' => $title,
                     'Category' => $category
                 ];
             } else {
                 $privatePosts[] = [
+                    'PostId' => $postId,
                     'PostDate' => $postDate,
                     'Title' => $title,
                     'Category' => $category
@@ -65,7 +59,6 @@
             }
         }
 
-        // Close connection
         mysqli_stmt_close($postPstmt);
     }
 ?>
@@ -105,7 +98,7 @@
         </nav>
     </header> 
 
-    <div class="user-profile">
+    <div class="user-profile">  
         <img src="<?php echo $profileImg !== '' ? './uploads/' . $profileImg : 'images/userIcon.svg'; ?>" alt="User Icon" class="circular">
         <p><?php echo $userId ?></p>
         <div class="button-container">
@@ -114,7 +107,7 @@
         </div>
         <div class="link-container">
             <a href="#" id="viewPublic" class="view-link" onclick="showPublicPosts()">Public</a>
-            |
+            <span id="verticalBar"> | </span>
             <a href="#" id="viewPrivate" class="view-link" onclick="showPrivatePosts()">Private</a>
             <hr />
         </div>
@@ -122,32 +115,46 @@
 
     <div class="user-post">
         <?php $i = 0; ?>
+
+        <!-- Public Posts -->
+        <!-- Iterate each post in the post array -->
         <?php foreach ($publicPosts as $post): ?> 
-            <?php if ($i % 3 === 0): ?>
+            <!-- <?php if ($i % 3 === 0): ?> -->
             <?php endif; ?>
-            <table class="post-table public-post">
-                <tr class="post-date">
-                    <td><?php echo $post['PostDate']; ?></td>
-                </tr>
-                <tr class="post-title">
-                    <td><?php echo $post['Title']; ?> - <?php echo $post['Category']; ?></td>
-                </tr>
-            </table>
-            <?php $i++; ?>
+            <!-- TODO: Change the link -->
+            <a id='postURL' href='post.php?id=<?php echo $post['PostId'];?>'>
+                <table class="post-table public-post">
+                    <tr class="post-date">
+                        <td colspan="2"><?php echo $post['PostDate']; ?></td>
+                    </tr>
+                    <tr class="post-title">
+                        <td><?php echo $post['Category']; ?></td>
+                        <td><?php echo $post['Title']; ?></td> 
+                    </tr>
+                </table>
+            </a>
+            <!-- <?php $i++; ?> -->
         <?php endforeach; ?>
 
+        <!-- Private Posts -->
+        <!-- Iterate each post in the post array -->
         <?php foreach ($privatePosts as $post): ?> 
             <?php if ($i % 3 === 0): ?>
                 <br/>
             <?php endif; ?>
-            <table class="post-table private-post" style="display: none;">
-                <tr class="post-date">
-                    <td><?php echo $post['PostDate']; ?></td>
-                </tr>
-                <tr class="post-title">
-                    <td><?php echo $post['Title']; ?> - <?php echo $post['Category']; ?></td>
-                </tr>
-            </table>
+            <!-- TODO: Change the link -->
+            <a id='postURL' href='post.php?id=<?php echo $post['PostId'];?>'>
+                <table class="post-table private-post" style="display: none;">
+                    <tr class="post-date">
+                        <!-- Specify col-span in the td, not tr! -->
+                        <td colspan="2"><?php echo $post['PostDate']; ?></td>
+                    </tr>
+                    <tr class="post-title">
+                        <td><?php echo $post['Category']; ?></td>
+                        <td><?php echo $post['Title']; ?></td> 
+                    </tr>
+                </table>
+            </a>
             <?php $i++; ?>
         <?php endforeach; ?>
     </div>
@@ -157,7 +164,7 @@
         <p id="footerPhoneNum">778-123-4567</p>
         <p id="footerEmail">iblogs@blogger.com</p>
         <p>
-            <img src="images/twitter (1).png" alt="Twitter" width="30">
+            <img src="images/twitter.png" alt="Twitter" width="30">
             <img src="images/facebook.png" alt="Facebook" width="30">       
             <img src="images/insta.png" alt="Instagram" width="30">
         </p>
@@ -166,4 +173,3 @@
 </body>
 
 </html>
-

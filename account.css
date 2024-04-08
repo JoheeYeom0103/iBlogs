@@ -9,12 +9,21 @@
     width: 100px; 
 }
 
+.circular {
+    width: 100px; 
+    height: 100px;
+    object-fit: cover; 
+    border-radius: 50%; 
+    margin-bottom: 0;
+}
+
 /* User Name */
 .user-profile p {
     font-size: 1.5em;
     margin: 10px 0;
 }
 
+/* Buttons */
 .button-container {
     margin-top: 1em;
 }
@@ -32,13 +41,7 @@
     background-color: #D2C1AA;
 }
 
-.circular {
-    width: 100px; 
-    height: 100px;
-    object-fit: cover; 
-    border-radius: 50%; 
-    margin-bottom: 0;
-}
+/* Public/Private Links */
 
 .link-container {
     margin-top: 3em;
@@ -50,34 +53,43 @@
     margin: 1em;
 }
 
-hr {
-    border: none;
-    border-top: 1px solid #886540; 
-    width: 30%;
-    margin-top: 1em;
-}
-/* Add your CSS styles here */
 .selected-link {
     padding: 0.5em;
     margin-bottom: 0.1em;
-    background-color: #e8dbc7;
+    background-color: #D2C1AA;
     border-radius: 7px;
 }
 
+hr {
+    border: none;
+    border-top: 1.5px solid #886540; 
+    width: 30%;
+    margin-top: 1em;
+}
+
+#verticalBar {
+    color: #886540;
+    font-weight: bold;
+}
+
+/* Posts */
+
+/* Entire group of post tables */
 .user-post {
     text-align: center;
-    margin: 2em auto; /* Set margin to 'auto' to horizontally center the container */
+    margin: 2em auto; 
     width: 80%;
 }
 
+/* Each post table */
 .post-table {
     display: inline-block;
     width: calc(30% - 2em); 
     margin: 1em 0.5em; 
     vertical-align: top; 
     text-align: center;
+    border-radius: 5px;
 }
-
 
 .post-table tr:nth-child(odd) {
     background-color: #D2C1AA;
@@ -87,8 +99,38 @@ hr {
     background-color: #F3E4CD;
 }
 
+.post-table:hover tr:nth-child(odd) {
+    background-color: #b5a185;
+}
+
+.post-table:hover tr:nth-child(even) {
+    background-color: #d8c4a6;
+}
+
 .post-table td {
     padding: 10px;
+}
+
+#postURL {
+    color: #443729;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+    .user-post {
+        text-align: center;
+        margin: 2em auto; 
+        width: 90%; 
+    }
+
+    .post-table {
+        width: calc(50% - 2em); 
+        margin: 1em 0.5em; 
+        vertical-align: top; 
+        text-align: center;
+        border-radius: 5px;
+        display: inline-block;
+    }
 }
 
 
