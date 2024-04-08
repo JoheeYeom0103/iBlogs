@@ -39,7 +39,7 @@
                 <button class="logoutButton" type="submit" name="logout"> Log Out </button>
               </form>
             </li>
-            <li><a href="AccountPage.php" class="menu">@<?php echo $userId ?></a></li>
+            <li><a href="#" class="menu">@<?php echo $userId ?></a></li>
                 
             </ul>
         </nav>
