@@ -15,6 +15,7 @@
     <!--Font Files-->
 
     <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="script/addComments.js"></script>
     <!-- Scripts -->
 
@@ -61,7 +62,7 @@
 
             <?php if(isset($_SESSION['userId'])) : ?>
             <!-- Display comment form if user is logged in -->
-            <form action="php/commentAction.php" method="post" id="addCommentForm" style="margin-top: 20px">
+            <form id="addCommentForm" action="php/commentAction.php" method="post" style="margin-top: 20px">
                 <input type="hidden" name="postId" value="<?php echo $postId; ?>">
                 <textarea name="commentContent" placeholder="Enter your comment here"></textarea>
                 <button type="submit" name="addSubmit" style="display: block;">Add Comment</button>

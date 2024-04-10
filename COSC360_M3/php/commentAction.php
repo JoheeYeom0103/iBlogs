@@ -1,5 +1,7 @@
 <?php
 
+// this is for only adding a comment 
+
 require("dbConnectZ.php");
 
 session_start();

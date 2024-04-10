@@ -4,8 +4,8 @@ require("dbConnectZ.php");
 
 session_start();
 
-// $userId = $_SESSION['userId']; // Get user id from session
-$userId = "spongebob_sq"; // Hardcoded user id for testing
+$userId = $_SESSION['userId']; // Get user id from session
+// $userId = "spongebob_sq"; // Hardcoded user id for testing
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // collect value of input field
