@@ -52,7 +52,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         move_uploaded_file($tmp_name, $img_upload_path);
         
                         // Update the ProfileImg field of User entity with the new image
-                        $imgSQL = "UPDATE User SET ProfileImg = ? WHERE UserId = ?";
+                        $imgSQL = "UPDATE user SET ProfileImg = ? WHERE UserId = ?";
                         $imgPstmt = mysqli_prepare($connection, $imgSQL);
                         if ($imgPstmt) {
                             mysqli_stmt_bind_param($imgPstmt, "ss", $new_img_name, $old_userId);
@@ -100,7 +100,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
         // If all fields are valid, update user data
         if ($isValid) {
-            $updateSQL = "UPDATE User SET UserId=?, FirstName=?, LastName=?, Email=?, Password=? WHERE UserId=?";
+            $updateSQL = "UPDATE user SET UserId=?, FirstName=?, LastName=?, Email=?, Password=? WHERE UserId=?";
             $updatePstmt = mysqli_prepare($connection, $updateSQL);
 
             if ($updatePstmt) {
