@@ -1,6 +1,6 @@
 <?php
 
-include('php/dbConnect.php');
+include('php/dbConnectZ.php');
 
 // Initialize old variables
 $old_userId = $old_firstname = $old_lastname = $old_password = $old_email = $old_img = "";

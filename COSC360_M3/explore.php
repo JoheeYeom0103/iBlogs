@@ -72,7 +72,7 @@
                 echo '<div class="userPosts">';
                 // Link to the individual post using post ID
                 // TODO update URL with correct page name for post page
-                echo '<h2><a id="postURL" href="post.php?id=' . $result["postId"] . '">' . $result["title"] . '</a></h2>';
+                echo '<h2><a id="postURL" href="ViewPostPage.php?id=' . $result["postId"] . '">' . $result["title"] . '</a></h2>';
                 echo '<p><b>Category:</b> ' . $result["interest_name"] . '</p>';
                 echo '<p>' . $result["content"] . '</p>';
                 echo '</div>';
@@ -83,7 +83,7 @@
                 echo '<div class="userPosts">';
                 // Link to the individual post using post ID
                 // TODO update URL with correct page name for post page
-                echo '<h2><a id="postURL" href="post.php?id=' . $post["postId"] . '">' . $post["title"] . '</a></h2>';
+                echo '<h2><a id="postURL" href="ViewPostPage.php?id=' . $post["postId"] . '">' . $post["title"] . '</a></h2>';
                 echo '<p><b>Category:</b> ' . $post["interest_name"] . '</p>';
                 echo '<p>' . $post["content"] . '</p>';
                 echo '</div>';

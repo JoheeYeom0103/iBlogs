@@ -1,7 +1,7 @@
 <?php
 
 session_start();
-include("dbConnect.php");
+include("dbConnectZ.php");
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $checkedValues = array();

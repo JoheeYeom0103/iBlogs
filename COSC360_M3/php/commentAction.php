@@ -1,29 +1,27 @@
-<?php 
+<?php
 
 require("dbConnectZ.php");
 
 session_start();
 
-$PostId = $_SESSION['PostId'];
+if(isset($_SESSION['userId']) && isset($_POST['postId']) && isset($_POST['commentContent'])) {
 
+    $postId = $_POST['postId'];
+    $commentContent = $_POST['commentContent'];
+    $userId = $_SESSION['userId'];
 
-if($_SERVER['REQUEST_METHOD'] == 'POST') {
-    // user can add a comment or delete a comment
-    if(isset($_POST['addComment'])) {
-        $commenter = $_POST['commenter'];
-        $content = $_POST['content'];
+    // Insert the comment into the database
+    $stmt = mysqli_prepare($connection, "INSERT INTO comment (PostId, UserId, DateOfComment, Content) VALUES (?, ?, NOW(), ?)");
+    mysqli_stmt_bind_param($stmt, "iss", $postId, $userId, $commentContent);
+    mysqli_stmt_execute($stmt);
 
-        $stmt = mysqli_prepare($connection, "INSERT INTO comment (PostId, Commenter, Content) VALUES (?, ?, ?)");
-        mysqli_stmt_bind_param($stmt, "sss", $postId, $commenter, $content);
-        mysqli_stmt_execute($stmt);
-    } else if(isset($_POST['deleteComment'])) {
-        // you need to be using jquery for this to work. look at adminDisplayUsers for an example
-        $commentId = $_POST['commentId'];
+    mysqli_close($connection);
 
-        $stmt = mysqli_prepare($connection, "DELETE FROM comment WHERE CommentId = ?");
-        mysqli_stmt_bind_param($stmt, "s", $commentId);
-        mysqli_stmt_execute($stmt);
-    }
+    // Redirect back to the post details page after adding the comment
+    header("Location: ../ViewPostPage.php?id=$postId");
+    exit();
+} else {
+    // Handle cases where required data is missing
+    echo "Error: Required data is missing.";
 }
-
 ?>

@@ -1,5 +1,5 @@
 <?php
-include("php/dbConnect.php");
+include("php/dbConnectZ.php");
 
 $userId = $_SESSION['userId'];
 

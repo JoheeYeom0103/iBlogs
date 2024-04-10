@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -14,7 +15,7 @@
     <!--Font Files-->
 
     <!-- Scripts -->
-    
+    <script src="script/addComments.js"></script>
     <!-- Scripts -->
 
 </head>
@@ -30,7 +31,7 @@
                 <button class="logoutButton" type="submit" name="logout"> Log Out </button>
               </form>
             </li>
-            <li><a href="AccountPage.php" class="menu">@<?php echo $userId?></a></li>
+            <li><a href="AccountPage.php" class="menu">@<?php echo $userId ?></a></li>
             </ul>
 
         </nav>
@@ -39,22 +40,44 @@
     <div>
         <!-- <h2>Post</h2>
         <div class="post">
-            <h3><?php echo $postTitle?></h3>
-            <p><?php echo $postContent?></p>
+            <h3></h3>
+            <p></p>
         </div>
         <div class="commentSection">
             <h2>Comments</h2>
             <div class="comment">
                 <h3>Commenter</h3>
                 <p>Comment</p>
-            </div> -->
+            </div>
+        </div> -->
 
-            <form method="get" action="" id="mainForm">
-            
-    </div>
+            <form method="post" action="" id="mainForm">
+                
+                <?php include("php/viewPostAction.php");?>  
+                
+            </form>
 
-    <div>
-        <?php include("php/viewPostAction.php");?>  
+
+
+            <?php if(isset($_SESSION['userId'])) : ?>
+            <!-- Display comment form if user is logged in -->
+            <form action="php/commentAction.php" method="post" id="addCommentForm" style="margin-top: 20px">
+                <input type="hidden" name="postId" value="<?php echo $postId; ?>">
+                <textarea name="commentContent" placeholder="Enter your comment here"></textarea>
+                <button type="submit" name="addSubmit" style="display: block;">Add Comment</button>
+            </form>
+
+        <?php else : ?>
+            <!-- Display a message to prompt the user to log in -->
+            <p>Please log in to add comments.</p>
+        <?php endif; ?>
+
+        
+
+        <form class='deleteForm' id='deleteForm" . $postRow['PostId'] . "' method='post' action='".$_SERVER["PHP_SELF"]."'>
+            <input type='hidden' name='delete' value='" . $postRow['PostId'] . "'>
+            <button type='submit' style='display: block; margin: 0 auto;'>Delete</button>
+        </form>
     </div>
 
 </body>
