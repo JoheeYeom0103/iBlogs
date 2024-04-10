@@ -53,9 +53,8 @@
             <br/>
             <img src="images/cateogry.svg" class="category-icon"/>
             <p class="inputHint">Category:</p>
-            <select name="category" class="inputLine">
-                <option value="" disabled selected>Select a category</option>
-                <select name="category" id="category">
+            
+            <select name="category" id="category">
                 <option value="" disabled selected>Select a category</option>
                 <option value="Technology">Technology</option>
                 <option value="Sports">Sports</option>
