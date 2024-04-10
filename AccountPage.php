@@ -2,7 +2,7 @@
     error_reporting(E_ALL);
     ini_set('display_errors', 1);
 
-    include('dbConnection.php');
+    include('dbConnect.php');
 
     /* TODO: Remove jane_smith once connected with login page */
     session_start();
@@ -71,12 +71,12 @@
     <title>Account Page</title>
     
     <!-- CSS Files -->
-    <link rel="stylesheet" href="css/headerfooter.css">
-    <link rel="stylesheet" href="css/account.css">
+    <link rel="stylesheet" href="../css/headerfooter.css">
+    <link rel="stylesheet" href="../css/account.css">
     <!-- CSS Files -->
 
     <!-- JavaScript Files -->
-    <script src="script/account.js"></script>
+    <script src="../script/account.js"></script>
     <!-- JavaScript Files -->
   
 
@@ -93,13 +93,18 @@
         <h1>iBlogs</h1>
         <nav>
             <ul>
+                <li>
+                    <form action="php/logoutAction.php" method="post">
+                        <button class="logoutButton" type="submit" name="logout">Log Out</button>
+                    </form>
+                </li>
                 <li><a href="#" class="menu">@<?php echo $userId ?></a></li>
             </ul>
         </nav>
     </header> 
 
     <div class="user-profile">  
-        <img src="<?php echo $profileImg !== '' ? './uploads/' . $profileImg : 'images/userIcon.svg'; ?>" alt="User Icon" class="circular">
+        <img src="<?php echo $profileImg !== '' ? '.././uploads/' . $profileImg : '../images/userIcon.svg'; ?>" alt="User Icon" class="circular">
         <p><?php echo $userId ?></p>
         <div class="button-container">
             <a href="EditAccountPage.php"><button class="round-button">Edit Account</button></a>
@@ -164,9 +169,9 @@
         <p id="footerPhoneNum">778-123-4567</p>
         <p id="footerEmail">iblogs@blogger.com</p>
         <p>
-            <img src="images/twitter.png" alt="Twitter" width="30">
-            <img src="images/facebook.png" alt="Facebook" width="30">       
-            <img src="images/insta.png" alt="Instagram" width="30">
+            <img src="../images/twitter.png" alt="Twitter" width="30">
+            <img src="../images/facebook.png" alt="Facebook" width="30">       
+            <img src="../images/insta.png" alt="Instagram" width="30">
         </p>
     </footer>
 
