@@ -1,6 +1,6 @@
 <?php
 
-include("dbConnectZ.php");
+include("dbConnect.php");
 
 if (isset($_GET["searchQuery"]) && !empty($_GET["searchQuery"])) {
     $searchQuery = $_GET["searchQuery"];
