@@ -7,7 +7,7 @@ $userId = $_SESSION['userId'];
 $searchKey = "";
 
 // Default SQL query to retrieve all users
-$sql = "SELECT * FROM User";
+$sql = "SELECT * FROM user";
 
 // Modify the SQL query to search for a specific user if search key is provided
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['search'])) {
