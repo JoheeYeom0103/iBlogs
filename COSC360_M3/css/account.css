@@ -1,0 +1,137 @@
+/* user-profile container */
+.user-profile {
+    text-align: center;
+    margin-top: 20px;
+}
+
+/* user image */
+.user-profile img {
+    width: 100px; 
+}
+
+.circular {
+    width: 100px; 
+    height: 100px;
+    object-fit: cover; 
+    border-radius: 50%; 
+    margin-bottom: 0;
+}
+
+/* User Name */
+.user-profile p {
+    font-size: 1.5em;
+    margin: 10px 0;
+}
+
+/* Buttons */
+.button-container {
+    margin-top: 1em;
+}
+
+.round-button {
+    border-color: transparent;
+    border-radius: 10px;
+    background-color: #e8dbc7;
+    padding: 10px 20px;
+    margin: 5px;
+    font-size: 1em;
+}
+
+.round-button:hover {
+    background-color: #D2C1AA;
+}
+
+/* Public/Private Links */
+
+.link-container {
+    margin-top: 3em;
+}
+
+.link-container a {
+    text-decoration: none;
+    color: #443729; 
+    margin: 1em;
+}
+
+.selected-link {
+    padding: 0.5em;
+    margin-bottom: 0.1em;
+    background-color: #D2C1AA;
+    border-radius: 7px;
+}
+
+hr {
+    border: none;
+    border-top: 1.5px solid #886540; 
+    width: 30%;
+    margin-top: 1em;
+}
+
+#verticalBar {
+    color: #886540;
+    font-weight: bold;
+}
+
+/* Posts */
+
+/* Entire group of post tables */
+.user-post {
+    text-align: center;
+    margin: 2em auto; 
+    width: 80%;
+}
+
+/* Each post table */
+.post-table {
+    display: inline-block;
+    width: calc(30% - 2em); 
+    margin: 1em 0.5em; 
+    vertical-align: top; 
+    text-align: center;
+    border-radius: 5px;
+}
+
+.post-table tr:nth-child(odd) {
+    background-color: #D2C1AA;
+}
+
+.post-table tr:nth-child(even) {
+    background-color: #F3E4CD;
+}
+
+.post-table:hover tr:nth-child(odd) {
+    background-color: #b5a185;
+}
+
+.post-table:hover tr:nth-child(even) {
+    background-color: #d8c4a6;
+}
+
+.post-table td {
+    padding: 10px;
+}
+
+#postURL {
+    color: #443729;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+    .user-post {
+        text-align: center;
+        margin: 2em auto; 
+        width: 90%; 
+    }
+
+    .post-table {
+        width: calc(50% - 2em); 
+        margin: 1em 0.5em; 
+        vertical-align: top; 
+        text-align: center;
+        border-radius: 5px;
+        display: inline-block;
+    }
+}
+
+
+
