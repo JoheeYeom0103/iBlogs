@@ -3,6 +3,11 @@ include("php/dbConnect.php");
 
 $userId = $_SESSION['userId'];
 
+
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['search'])) {
+    echo '<a href="' . $_SERVER['PHP_SELF'] . '" class="adminBackButton">Back</a>';
+}
+
 // Default search key
 $searchKey = "";
 
