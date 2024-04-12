@@ -86,7 +86,7 @@ include('php/EditAccountPage_Action.php');
 
     <!-- External css & js -->
     <link rel="stylesheet" href="css/headerfooter.css">
-    <link rel="stylesheet" href="css/EditAccountPage.css">
+    <link rel="stylesheet" href="css/editAccountPage.css">
     <script src="validation.js"></script>
     <!-- External css & js -->
 
