@@ -2,7 +2,7 @@
 
 // begin session
 session_start();
-include("dbConnectZ.php");
+include("dbConnect.php");
 
 // set the userID based on the session userID attained from logging in/signing up
 if (isset($_SESSION["userId"])){

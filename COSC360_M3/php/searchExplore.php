@@ -1,14 +1,15 @@
-<?php
-
-include("dbConnectZ.php");
+<?php 
+include("dbConnect.php");
 
 if (isset($_GET["searchQuery"]) && !empty($_GET["searchQuery"])) {
     $searchQuery = $_GET["searchQuery"];
     $searchResults = searchPosts($searchQuery, $connection);
+} else {
+    $searchResults = null; // Set to null to avoid undefined variable warning
 }
 
 function searchPosts($searchQuery, $conn) {
-    $sql = "SELECT post.Title, post.Content, interest.InterestName
+    $sql = "SELECT post.PostId, post.Title, post.Content, interest.InterestName
             FROM post
             JOIN interest ON post.Category = interest.InterestName
             WHERE post.Title LIKE ? OR post.Content LIKE ? OR interest.InterestName LIKE ?";
@@ -22,6 +23,7 @@ function searchPosts($searchQuery, $conn) {
     $searchResults = array();
     while ($row = mysqli_fetch_array($result)) {
         $searchResults[] = array(
+            "postId" => $row["PostId"],
             "title" => $row["Title"],
             "content" => $row["Content"],
             "interest_name" => $row["InterestName"]

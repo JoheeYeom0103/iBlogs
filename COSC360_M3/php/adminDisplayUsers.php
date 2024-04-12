@@ -3,11 +3,16 @@ include("php/dbConnectZ.php");
 
 $userId = $_SESSION['userId'];
 
+
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['search'])) {
+    echo '<a href="' . $_SERVER['PHP_SELF'] . '" class="adminBackButton">Back</a>';
+}
+
 // Default search key
 $searchKey = "";
 
 // Default SQL query to retrieve all users
-$sql = "SELECT * FROM User";
+$sql = "SELECT * FROM user";
 
 // Modify the SQL query to search for a specific user if search key is provided
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['search'])) {
@@ -51,8 +56,9 @@ if ($pstmt) {
                     echo "<tr><td>" . $postRow['PostId'] . "</td><td>" . $postRow['Content'] . "</td><td>
                     <form class='deleteForm' id='deleteForm" . $postRow['PostId'] . "' method='post' action='".$_SERVER["PHP_SELF"]."'>
                     <input type='hidden' name='delete' value='" . $postRow['PostId'] . "'>
-                    <button type='submit'>Delete</button>
+                    <button type='button' onclick='confirmDelete(\"deleteForm" . $postRow["PostId"] . "\")'>Delete</button>
                     </form></td></tr>";
+
                 }
                 echo "</table></td></tr>";
             }
@@ -71,7 +77,7 @@ if ($pstmt) {
                     echo "<tr><td>" . $commentRow['CommentId'] . "</td><td>" . $commentRow['Content'] . "</td><td>
                     <form class='deleteCommentForm' id='deleteCommentForm" . $commentRow['CommentId'] . "' method='post' action='".$_SERVER["PHP_SELF"]."'>
                     <input type='hidden' name='deleteComment' value='" . $commentRow['CommentId'] . "'>
-                    <button type='submit'>Delete</button>
+                    <button type='button' onclick='confirmDelete(\"deleteCommentForm" . $commentRow["CommentId"] . "\")'>Delete</button>
                     </form></td></tr>";
                 }
                 echo "</table></td></tr>";
@@ -112,3 +118,11 @@ if ($pstmt) {
     echo "Prepared statement error: " . mysqli_error($connection);
 }
 mysqli_close($connection);
+?>
+ <script>
+    function confirmDelete(formId) {
+        if (confirm('Are you sure you want to delete this?')) {
+            document.getElementById(formId).submit();
+        }
+    }
+</script>

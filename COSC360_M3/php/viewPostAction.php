@@ -1,5 +1,5 @@
 <?php
-require("dbConnectZ.php");
+require("dbConnect.php");
 
 // Retrieve the postId from the URL query parameter
 if(isset($_GET['id'])) {

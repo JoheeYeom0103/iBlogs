@@ -47,8 +47,10 @@
         <input type="text" name="searchQuery" placeholder="food, lifestyle ..." />
         <button class="exploreSearchButton" type="submit">Search</button>
       </form>
+      <?php if (isset($_GET["searchQuery"]) && !empty($_GET["searchQuery"])): ?>
+        <a href="explore.php" class="backButton">Back to all search results</a>
+      <?php endif; ?>
     </div>
-
 
     <section id="categorySection">
           <?php

@@ -1,4 +1,9 @@
-<?php session_start(); ?>
+<?php 
+
+    session_start();
+    $userId = $_SESSION["userId"];
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -34,24 +39,13 @@
               </form>
             </li>
             <li><a href="AccountPage.php" class="menu">@<?php echo $userId ?></a></li>
+           
             </ul>
 
         </nav>
     </header> 
 
     <div>
-        <!-- <h2>Post</h2>
-        <div class="post">
-            <h3></h3>
-            <p></p>
-        </div>
-        <div class="commentSection">
-            <h2>Comments</h2>
-            <div class="comment">
-                <h3>Commenter</h3>
-                <p>Comment</p>
-            </div>
-        </div> -->
 
             <form method="post" action="" id="mainForm">
                 

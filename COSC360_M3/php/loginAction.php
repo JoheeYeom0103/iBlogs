@@ -13,11 +13,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $errors = isEmptyLogin($userId, $password);
 
     if(empty($errors)){
-        $sql = "SELECT * FROM user WHERE UserId = ?";
+        $sql = "SELECT * FROM user WHERE UserId = ? AND NOT EXISTS (SELECT 1 FROM administrator WHERE AdminId = ?)";
         // use prepared statement
         $stmt =  mysqli_prepare($connection, $sql);
         // Bind parameters to the query
-        mysqli_stmt_bind_param($stmt, "s", $userId);
+        mysqli_stmt_bind_param($stmt, "ss", $userId, $userId);
 
         // Execute the prepared statement
         mysqli_stmt_execute($stmt);

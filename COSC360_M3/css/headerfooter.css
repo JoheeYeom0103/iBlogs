@@ -62,3 +62,15 @@ footer {
     font-size: 1em !important;
     background: none !important;
 }
+
+.logoutButton:hover{
+    background-color: #f9ede2 !important;
+}
+
+@media only screen and (max-width: 600px) {
+    nav a {
+        color: black;
+        margin-right: 2.5em;
+    }
+}
+  
