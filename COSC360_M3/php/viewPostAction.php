@@ -114,23 +114,27 @@ if(isset($_GET['id'])) {
         // DELETING OF POST
         // ---------------------------------------------------------------------------------------------------------------------------------------
 
-        echo "<form class='deletePost' id='deletePost" . $post['PostId'] . "' method='post' action='ViewPostPage.php?id=" . $postId . "'>
+        if($_SESSION['userId'] !== $post['UserId']){
+            echo '';
+        }else{
+            echo "<form class='deletePost' id='deletePost" . $post['PostId'] . "' method='post' action='ViewPostPage.php?id=" . $postId . "'>
             <input type='hidden' name='deletePost' value='" . $post['PostId'] . "'>
-            <button style='margin-top:1.5em;' type='submit' name='deletePost' " . ($_SESSION['userId'] !== $post['UserId'] ? 'style="display: none;"' : '') . ">Delete This Post</button>
-        </form>";
+            <button style='margin-top:1.5em;' type='submit' name='deletePost'>Delete This Post</button>
+            </form>";
 
-        if (isset($_POST['deletePost'])) {
-            $deletePostId = $post['PostId'];
-            $deletePostSql = "DELETE FROM post WHERE PostId = ?";
-            $deletePostPstmt = mysqli_prepare($connection, $deletePostSql);
-            mysqli_stmt_bind_param($deletePostPstmt, "i", $deletePostId);
-            if (mysqli_stmt_execute($deletePostPstmt)) {
-                header("Location: explore.php");
-                echo "Post deleted successfully.";
-            } else {
-                echo "Error deleting post: " . mysqli_error($connection);
-            }
-        } // end of if for deleting a post  
+            if (isset($_POST['deletePost'])) {
+                $deletePostId = $post['PostId'];
+                $deletePostSql = "DELETE FROM post WHERE PostId = ?";
+                $deletePostPstmt = mysqli_prepare($connection, $deletePostSql);
+                mysqli_stmt_bind_param($deletePostPstmt, "i", $deletePostId);
+                if (mysqli_stmt_execute($deletePostPstmt)) {
+                    header("Location: explore.php");
+                    echo "Post deleted successfully.";
+                } else {
+                    echo "Error deleting post: " . mysqli_error($connection);
+                }
+            }// end of if for deleting a post
+        }   
 
     } else {
         echo "Post not found";
