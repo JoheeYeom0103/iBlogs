@@ -52,18 +52,24 @@ if(isset($_GET['id'])) {
         if(mysqli_num_rows($commentResult) > 0) {
             echo "<p><strong>Comments</strong></p>";
             while($comment = mysqli_fetch_assoc($commentResult)) {
-                echo "<div>
-                    <table style='border: 1px black solid; font-size: 11px; margin-top: 20px'> <tr rowspan='3'><td>
+                echo "<div style='border: 1px black solid; font-size: 11px; margin-top: 20px'>";
+                    
+                echo "<tr rowspan='3'>
+                <td>
                     <p><strong>User: </strong>" . $comment['UserId'] . "</p>
                     <p><strong>Date: </strong>" . $comment['DateOfComment'] . "</p>
                     <p><strong> </strong>" . $comment['Content'] . "</p>
-                    </td></tr></table>
+                    </td>
 
-                    <form class='deleteCommentForm' id='deleteCommentForm" . $commentRow['CommentId'] . "' method='post' action='".$_SERVER["PHP_SELF"]."'>
-                    <input type='hidden' name='deleteComment' value='" . $commentRow['CommentId'] . "'>
+                    <td>
+                    <form class='deleteCommentForm' id='deleteCommentForm" . $comment['CommentId'] . "'method='post' action='".$_SERVER["PHP_SELF"]."'>
+                    <input type='hidden' name='deleteComment' value='" . $comment['CommentId'] . "'>
                     <button type='submit'>Delete</button>
                     </form>
+                    </td>
 
+                    </tr>
+                    
                 </div>";
             } // end while
 
@@ -91,18 +97,28 @@ if(isset($_GET['id'])) {
         //     </form>";
         
 
-        // deleting post from database
-        if (isset($_POST['delete'])) {
-            $deletePostId = $_POST['delete'];
-            $deleteSql = "DELETE FROM post WHERE PostId = ?";
-            $deletePstmt = mysqli_prepare($connection, $deleteSql);
-            mysqli_stmt_bind_param($deletePstmt, "s", $deletePostId);
-            if (mysqli_stmt_execute($deletePstmt)) {
-                echo "Post deleted successfully.";
-            } else {
-                echo "Error deleting post: " . mysqli_error($connection);
-            }
-        } // end of if for deleting a post
+
+
+
+
+
+
+        // // deleting post from database
+        // if (isset($_POST['delete'])) {
+        //     $deletePostId = $_POST['delete'];
+        //     $deleteSql = "DELETE FROM post WHERE PostId = ?";
+        //     $deletePstmt = mysqli_prepare($connection, $deleteSql);
+        //     mysqli_stmt_bind_param($deletePstmt, "s", $deletePostId);
+        //     if (mysqli_stmt_execute($deletePstmt)) {
+        //         echo "Post deleted successfully.";
+        //     } else {
+        //         echo "Error deleting post: " . mysqli_error($connection);
+        //     }
+        // } // end of if for deleting a post
+
+
+
+
 
     } else {
         echo "Post not found";
