@@ -4,7 +4,6 @@
 
     include('php/dbConnect.php');
 
-    /* TODO: Remove jane_smith once connected with login page */
     session_start();
     $userId = $_SESSION['userId'];
     $profileImg = ''; 
@@ -127,7 +126,7 @@
             <!-- <?php if ($i % 3 === 0): ?> -->
             <?php endif; ?>
             <!-- TODO: Change the link -->
-            <a id='postURL' href='post.php?id=<?php echo $post['PostId'];?>'>
+            <a id='postURL' href='ViewPostPage.php?id=<?php echo $post['PostId'];?>'>
                 <table class="post-table public-post">
                     <tr class="post-date">
                         <td colspan="2"><?php echo $post['PostDate']; ?></td>
