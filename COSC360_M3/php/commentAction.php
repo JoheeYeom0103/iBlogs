@@ -26,4 +26,4 @@ if(isset($_SESSION['userId']) && isset($_POST['postId']) && isset($_POST['commen
     // Handle cases where required data is missing
     echo "Error: Required data is missing.";
 }
-?>
+

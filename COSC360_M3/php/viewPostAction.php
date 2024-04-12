@@ -4,7 +4,6 @@ require("dbConnect.php");
 // Retrieve the postId from the URL query parameter
 if(isset($_GET['id'])) {
     $postId = $_GET['id'];
-    
 
     // Prepare and execute the query to retrieve the post details
     $stmt = mysqli_prepare($connection, "SELECT * FROM post WHERE PostId = ?");
@@ -15,14 +14,6 @@ if(isset($_GET['id'])) {
     // Check if a post with the given postId exists
     if(mysqli_num_rows($result) > 0) {
         $post = mysqli_fetch_assoc($result);
-        // Display post details
-        // echo "<h1>" . $post['Title'] . "</h1>";
-        // echo "<p>" . $post['UserId'] . "</p>";
-        // echo "<p>Date: " . $post['DateOfPost'] . "</p>";
-        // echo "<p>Category: " . $post['Category'] . "</p>";
-        // echo "<p>Content: " . $post['Content'] . "</p>";
-
-
 
         echo "<div class='diary-container'>        
                 <div class='header'>
@@ -36,11 +27,30 @@ if(isset($_GET['id'])) {
                 <p class='inputHint'><strong>Category: </strong>" . $post['Category'] . "</p>
             </div>"; 
 
-        echo "<div class='content'>
-            <textarea class='diary-entry' name='diary-entry'>" . $post['Content'] . "</textarea>
+          // only allow users who's post it is edit access by setting the textarea to read only for viewers
+          echo "<div class='content'>
+          <form method='POST' >
+              <textarea class='diary-entry' name='diary-entry'" . ($_SESSION['userId'] !== $post['UserId'] ? ' readonly' : '') . ">" . $post['Content'] . "</textarea>
+              <input type='hidden' name='postId' value='" . $postId . "'>
+              <button type='submit' name='editSubmit' " . ($_SESSION['userId'] !== $post['UserId'] ? 'style="display: none;"' : '') . ">Save Edit</button>
+          </form>
         </div>";
 
-
+        if (isset($_POST['editSubmit'])) {
+            $editedContent = $_POST['diary-entry'];
+            $postId = $_POST['postId'];
+        
+            // Update the post content in the database
+            $updateStmt = mysqli_prepare($connection, "UPDATE post SET Content = ? WHERE PostId = ?");
+            mysqli_stmt_bind_param($updateStmt, "si", $editedContent, $postId);
+            if (mysqli_stmt_execute($updateStmt)) {
+                echo "Edit saved successfully.";
+                header("Location: ViewPostPage.php?id=" . $postId);
+            } else {
+                echo "Error saving edit: " . mysqli_error($connection);
+            }
+        }
+        
 
         // Retrieve and display comments for this post
         $commentStmt = mysqli_prepare($connection, "SELECT * FROM comment WHERE PostId = ?");
@@ -64,7 +74,7 @@ if(isset($_GET['id'])) {
                     <td>
                     <form class='deleteCommentForm' id='deleteCommentForm" . $comment['CommentId'] . "'method='post' action='".$_SERVER["PHP_SELF"]."'>
                     <input type='hidden' name='deleteComment' value='" . $comment['CommentId'] . "'>
-                    <button type='submit'>Delete</button>
+                    <button type='submit' name='deleteComment' " . ($_SESSION['userId'] !== $comment['UserId'] ? 'style="display: none;"' : '') . ">Delete</button>
                     </form>
                     </td>
 
@@ -90,36 +100,6 @@ if(isset($_GET['id'])) {
             echo "<p>No comments found</p>";
         }
 
-        // to delete a post -- added below to ViewPostPage.php
-        // echo "<form class='deleteForm' id='deleteForm" . $postRow['PostId'] . "' method='post' action='".$_SERVER["PHP_SELF"]."'>
-        //         <input type='hidden' name='delete' value='" . $postRow['PostId'] . "'>
-        //         <button type='submit'>Delete</button>
-        //     </form>";
-        
-
-
-
-
-
-
-
-        // // deleting post from database
-        // if (isset($_POST['delete'])) {
-        //     $deletePostId = $_POST['delete'];
-        //     $deleteSql = "DELETE FROM post WHERE PostId = ?";
-        //     $deletePstmt = mysqli_prepare($connection, $deleteSql);
-        //     mysqli_stmt_bind_param($deletePstmt, "s", $deletePostId);
-        //     if (mysqli_stmt_execute($deletePstmt)) {
-        //         echo "Post deleted successfully.";
-        //     } else {
-        //         echo "Error deleting post: " . mysqli_error($connection);
-        //     }
-        // } // end of if for deleting a post
-
-
-
-
-
     } else {
         echo "Post not found";
     }
@@ -128,4 +108,3 @@ if(isset($_GET['id'])) {
 }
 
 mysqli_close($connection);
-?>
