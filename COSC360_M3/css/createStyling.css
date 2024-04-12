@@ -178,6 +178,22 @@ Keep the display to block when share-options is hovered even if share-btn is not
   opacity: 1;
 }
 
+.backButtonAccount{
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #f4e5ce;
+  color: black;
+  text-decoration: none;
+  border-radius: 5px;
+  margin-top: 10px; 
+  margin-left: 1em;
+  width: fit-content;
+}
+
+.backButtonAccount:hover {
+  background-color: #D3C1Ab;
+}
+
 .backButton{
   display: inline-block;
   padding: 10px 20px;

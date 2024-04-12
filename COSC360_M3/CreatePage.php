@@ -39,6 +39,9 @@
         </nav>
     </header> 
 
+    <a href="AccountPage.php" class="backButtonAccount">Back to Account Page</a>
+
+
     <div class="diary-container">
         <form id="createPostForm" action="php/createpageAction.php" method="post">
         

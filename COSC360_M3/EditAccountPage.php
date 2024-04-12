@@ -3,7 +3,7 @@
 include('php/dbConnect.php');
 
 // Initialize old variables
-$old_userId = $old_firstname = $old_lastname = $old_password = $old_email = $old_img = "";
+$old_userId = $old_firstname = $old_lastname = $old_email = $old_img = "";
 $userIdClass = $firstNameClass = $lastNameClass = $passwordClass = $passwordConfirmationClass = $emailClass = "";
 
 /******************************* SESSION *******************************/
@@ -48,10 +48,6 @@ function getInputValue($field) {
                 return $old_firstname;
             case 'lastName':
                 return $old_lastname;
-            case 'password':
-                return $old_password;
-            case 'passwordConfirmation':
-                return $old_password;
             case 'email':
                 return $old_email;
             default:
@@ -151,8 +147,10 @@ include('php/EditAccountPage_Action.php');
         </nav>
     </header> 
 
+    <a href="AccountPage.php" class="backButtonAccount">Back to Account Page</a>
+
     <div id="profile-details">
-        
+
         <form method="post" action="" id="profile-form" class="user-profile" enctype="multipart/form-data">
             <h2>Edit Account</h2>
             <h3 class="profile-heading">Photo</h3>
