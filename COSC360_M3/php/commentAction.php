@@ -2,7 +2,7 @@
 
 // this is for only adding a comment !!!!!!!!!
 
-require("dbConnect.php");
+require("dbConnectZ.php");
 
 session_start();
 

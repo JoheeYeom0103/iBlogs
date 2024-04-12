@@ -1,5 +1,5 @@
 <?php
-require("dbConnect.php");
+require("dbConnectZ.php");
 
 // Retrieve the postId from the URL query parameter
 if(isset($_GET['id'])) {
@@ -66,7 +66,8 @@ if(isset($_GET['id'])) {
             while($comment = mysqli_fetch_assoc($commentResult)) {
                 echo "<div style='border: 1px black solid; font-size: 11px; margin-top: 20px'>";
                     
-                echo "<tr rowspan='3'>
+                echo "<table rowspan='3'>
+                <tr>
                 <td>
                     <p><strong>User: </strong>" . $comment['UserId'] . "</p>
                     <p><strong>Date: </strong>" . $comment['DateOfComment'] . "</p>
@@ -74,17 +75,17 @@ if(isset($_GET['id'])) {
                     </td>
 
                     <td>
-                    <form class='deleteComment' id='deleteComment" . $comment['CommentId'] . "' method='post' action='ViewPostPage.php?id=" . $postId . "'>
+                    <form class='deleteComment' id='deleteComment" . $comment['CommentId'] . "' method='post' action='".$_SERVER["PHP_SELF"] . $postId . "'>
                     <input type='hidden' name='deleteComment' value='" . $comment['CommentId'] . "'>
                     <button type='submit' name='deleteComment' " . ($_SESSION['userId'] !== $comment['UserId'] ? 'style="display: none;"' : '') . ">Delete</button>
                     </form>
                     </td>
 
                     </tr>
-                </div>";
+                </table>";
 
                 // delete comment
-            if (isset($_POST['deleteComment'])) {
+                if (isset($_POST['deleteComment']) && $_POST['deleteComment'] == $comment['CommentId']) {
                 $deleteCommentId = $comment['CommentId'];
                 $deleteCommentSql = "DELETE FROM comment WHERE CommentId = ?";
                 $deleteCommentPstmt = mysqli_prepare($connection, $deleteCommentSql);
@@ -96,7 +97,8 @@ if(isset($_GET['id'])) {
                     echo "Error deleting comment: " . mysqli_error($connection);
                 }
             } // end of if for deleting a comment  
-                
+               
+                echo "</div>";
             } // end while 
 
         } else {
