@@ -172,6 +172,23 @@ input[type="file"] {
     background-color: #d2c1ab;
 }
 
+.backButtonAccount{
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #f4e5ce;
+    color: black;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-top: 10px; 
+    margin-left: 1em;
+    width: fit-content;
+  }
+  
+  .backButtonAccount:hover {
+    background-color: #D3C1Ab;
+  }
+  
+
 @media screen and (max-width: 600px) {
     #userNames, #userPw, #interest-field {
         display: block;
