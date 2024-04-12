@@ -50,7 +50,9 @@ if(isset($_GET['id'])) {
                 echo "Error saving edit: " . mysqli_error($connection);
             }
         }
-        
+
+        // ----------------------------------------------------------------------------------------------------------------
+        // ----------------------------------------------------------------------------------------------------------------
 
         // Retrieve and display comments for this post
         $commentStmt = mysqli_prepare($connection, "SELECT * FROM comment WHERE PostId = ?");
@@ -72,29 +74,30 @@ if(isset($_GET['id'])) {
                     </td>
 
                     <td>
-                    <form class='deleteCommentForm' id='deleteCommentForm" . $comment['CommentId'] . "'method='post' action='".$_SERVER["PHP_SELF"]."'>
+                    <form class='deleteComment' id='deleteComment" . $comment['CommentId'] . "' method='post' action='ViewPostPage.php?id=" . $postId . "'>
                     <input type='hidden' name='deleteComment' value='" . $comment['CommentId'] . "'>
                     <button type='submit' name='deleteComment' " . ($_SESSION['userId'] !== $comment['UserId'] ? 'style="display: none;"' : '') . ">Delete</button>
                     </form>
                     </td>
 
                     </tr>
-                    
                 </div>";
-            } // end while
 
-            // delete comment
+                // delete comment
             if (isset($_POST['deleteComment'])) {
-                $deleteCommentId = $_POST['deleteComment'];
+                $deleteCommentId = $comment['CommentId'];
                 $deleteCommentSql = "DELETE FROM comment WHERE CommentId = ?";
                 $deleteCommentPstmt = mysqli_prepare($connection, $deleteCommentSql);
-                mysqli_stmt_bind_param($deleteCommentPstmt, "s", $deleteCommentId);
+                mysqli_stmt_bind_param($deleteCommentPstmt, "i", $deleteCommentId);
                 if (mysqli_stmt_execute($deleteCommentPstmt)) {
                     echo "Comment deleted successfully.";
+                    header("Location: ViewPostPage.php?id=" . $postId);
                 } else {
                     echo "Error deleting comment: " . mysqli_error($connection);
                 }
             } // end of if for deleting a comment  
+                
+            } // end while 
 
         } else {
             echo "<p>No comments found</p>";
