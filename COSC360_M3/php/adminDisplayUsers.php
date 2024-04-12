@@ -3,7 +3,6 @@ include("php/dbConnect.php");
 
 $userId = $_SESSION['userId'];
 
-
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['search'])) {
     echo '<a href="' . $_SERVER['PHP_SELF'] . '" class="adminBackButton">Back</a>';
 }
@@ -56,7 +55,7 @@ if ($pstmt) {
                     echo "<tr><td>" . $postRow['PostId'] . "</td><td>" . $postRow['Content'] . "</td><td>
                     <form class='deleteForm' id='deleteForm" . $postRow['PostId'] . "' method='post' action='".$_SERVER["PHP_SELF"]."'>
                     <input type='hidden' name='delete' value='" . $postRow['PostId'] . "'>
-                    <button type='button' onclick='confirmDelete(\"deleteForm" . $postRow["PostId"] . "\")'>Delete</button>
+                    <button type='submit' onclick='return confirmDelete()'>Delete</button>
                     </form></td></tr>";
 
                 }
@@ -77,7 +76,7 @@ if ($pstmt) {
                     echo "<tr><td>" . $commentRow['CommentId'] . "</td><td>" . $commentRow['Content'] . "</td><td>
                     <form class='deleteCommentForm' id='deleteCommentForm" . $commentRow['CommentId'] . "' method='post' action='".$_SERVER["PHP_SELF"]."'>
                     <input type='hidden' name='deleteComment' value='" . $commentRow['CommentId'] . "'>
-                    <button type='button' onclick='confirmDelete(\"deleteCommentForm" . $commentRow["CommentId"] . "\")'>Delete</button>
+                    <button type='submit' onclick='return confirmDelete()'>Delete</button>
                     </form></td></tr>";
                 }
                 echo "</table></td></tr>";
@@ -119,10 +118,8 @@ if ($pstmt) {
 }
 mysqli_close($connection);
 ?>
- <script>
-    function confirmDelete(formId) {
-        if (confirm('Are you sure you want to delete this?')) {
-            document.getElementById(formId).submit();
-        }
+<script>
+    function confirmDelete() {
+        return confirm('Are you sure you want to delete this?');
     }
 </script>
