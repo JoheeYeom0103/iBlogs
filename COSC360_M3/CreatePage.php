@@ -53,31 +53,34 @@
             <br/>
             <img src="images/cateogry.svg" class="category-icon"/>
             <p class="inputHint">Category:</p>
-            <select name="category" class="inputLine">
+            
+            <select name="category" id="category">
                 <option value="" disabled selected>Select a category</option>
-                <option value="Personal">Personal</option>
-                <option value="Travel">Travel</option>
-                <option value="Food">Food</option>
-                <option value="Lifestyle">Lifestyle</option>
-                <option value="Health">Health</option>
-                <option value="Fitness">Fitness</option>
+                <option value="Technology">Technology</option>
+                <option value="Sports">Sports</option>
+                <option value="Cars">Cars</option>
+                <option value="Footwear">Footwear</option>
+                <option value="Science">Science</option>
+                <option value="Art">Art</option>
                 <option value="Fashion">Fashion</option>
                 <option value="Beauty">Beauty</option>
-                <option value="Technology">Technology</option>
-                <option value="Entertainment">Entertainment</option>
-                <option value="Sports">Sports</option>
-                <option value="Education">Education</option>
-                <option value="Business">Business</option>
-                <option value="Finance">Finance</option>
-                <option value="Science">Science</option>
-                <option value="Environment">Environment</option>
-                <option value="Politics">Politics</option>
-                <option value="Art">Art</option>
+                <option value="DIY & Crafts">DIY & Crafts</option>
+                <option value="Home Decor">Home Decor</option>
+                <option value="Film">Film</option>
+                <option value="Travel">Travel</option>
                 <option value="Music">Music</option>
-                <option value="Movies">Movies</option>
                 <option value="Books">Books</option>
-                <option value="Games">Games</option>
+                <option value="Education">Education</option>
+                <option value="Funny">Funny</option>
+                <option value="Business">Business</option>
+                <option value="Holidays">Holidays</option>
                 <option value="Other">Other</option>
+                <option value="Food">Food</option>
+                <option value="Health">Health</option>
+                <option value="Entertainment">Entertainment</option>
+                <option value="Politics">Politics</option>
+                <option value="Architecture">Architecture</option>
+                <option value="Nature">Nature</option>
             </select>
             <span class="tooltip-category">
                 <img src="images/helpIcon-01.svg" alt="Help Icon" class="help-icon">
@@ -120,7 +123,7 @@
         <p id="footerPhoneNum">778-123-4567</p>
         <p id="footerEmail">iblogs@blogger.com</p>
         <p>
-            <img src="images/twitter (1).png" alt="Twitter" width="30">
+            <img src="images/twitter.png" alt="Twitter" width="30">
             <img src="images/facebook.png" alt="Facebook" width="30">       
             <img src="images/insta.png" alt="Instagram" width="30">
         </p>

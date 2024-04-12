@@ -3,6 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>Category Preferences</title>
+    <script>
+        window.onbeforeunload = function() {
+            return "Are you sure you want to leave this page?";
+        };
+    </script>
     <!-- Stylesheets -->
     <link rel="stylesheet" href="css/categoryPage.css">
     <link rel="stylesheet" href="css/headerfooter.css">
@@ -146,7 +151,7 @@
     <p id="footerPhoneNum">778-123-4567</p>
     <p id="footerEmail">iblogs@blogger.com</p>
     <p>
-        <img src="images/twitter (1).png" alt="Twitter" width="30">
+        <img src="images/twitter.png" alt="Twitter" width="30">
         <img src="images/facebook.png" alt="Facebook" width="30">
         <img src="images/insta.png" alt="Instagram" width="30">
     </p>

@@ -20,7 +20,7 @@ if (isset($_SESSION["userId"])){
 function getUserPosts($userId, $conn){
     // retrieve posts based on the user's interests by querying the DB
     if ($userId !== null) {
-        $sql = "SELECT post.Title, post.Content, interest.InterestName
+        $sql = "SELECT post.PostId, post.Title, post.Content, interest.InterestName
                 FROM post
                 JOIN interest ON post.Category = interest.InterestName
                 JOIN userinterest ON interest.InterestId = userinterest.InterestId
@@ -31,7 +31,7 @@ function getUserPosts($userId, $conn){
         $result = mysqli_stmt_get_result($stmt);
     } else {
         // Default query if user is a guest
-        $sql = "SELECT post.Title, post.Content, interest.InterestName
+        $sql = "SELECT post.PostId, post.Title, post.Content, interest.InterestName
                 FROM post
                 JOIN interest ON post.Category = interest.InterestName
                 LIMIT 6";
@@ -43,6 +43,7 @@ function getUserPosts($userId, $conn){
         // store the retrieved post information in an array 
         while($row = mysqli_fetch_array($result)){
             $userPosts[] = array(
+                "postId" => $row["PostId"],
                 "title" => $row["Title"],
                 "content" => $row["Content"],
                 "interest_name" => $row["InterestName"]

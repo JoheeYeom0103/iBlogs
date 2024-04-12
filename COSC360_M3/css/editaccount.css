@@ -141,8 +141,6 @@ input:focus {
     transition: opacity ease-in-out 0.3s;
 }
 
-/* if .profile-field .helpIcon is hovered, update p 
-   which is an immediate sibling of  .profile-field .helpIcon */
 .profile-field .helpIcon:hover + p {
     opacity: 1; 
     background-color: white;
@@ -153,6 +151,26 @@ input:focus {
     background-color: #F9EDE2 !important;
 }
 
+input[type="file"] {
+    display: none;
+}
+
+.file-upload-button {
+    display: inline-block;
+    font-size: 0.8em;
+    background-color: #e8dbc7; 
+    color: #443729; 
+    padding: 4px 7px; 
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    margin: 0px;
+    transition: background-color 0.3s;
+}
+
+.file-upload-button:hover {
+    background-color: #d2c1ab;
+}
 
 @media screen and (max-width: 600px) {
     #userNames, #userPw, #interest-field {

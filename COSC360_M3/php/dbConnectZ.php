@@ -1,9 +1,9 @@
 <?php
 
 $host = "localhost";
-$database = "iblogs";
-$user = "tatkg24";
-$password = "C0sc360!!";
+$database = "iBlogs";
+$user = "zaynb";
+$password = "cosc360db";
 
 $connection = mysqli_connect($host, $user, $password, $database);
 

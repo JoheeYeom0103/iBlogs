@@ -47,8 +47,10 @@
         <input type="text" name="searchQuery" placeholder="food, lifestyle ..." />
         <button class="exploreSearchButton" type="submit">Search</button>
       </form>
+      <?php if (isset($_GET["searchQuery"]) && !empty($_GET["searchQuery"])): ?>
+        <a href="explore.php" class="backButton">Back to all search results</a>
+      <?php endif; ?>
     </div>
-
 
     <section id="categorySection">
           <?php
@@ -70,7 +72,9 @@
             // Display search results if the user is searching
             foreach ($searchResults as $result) {
                 echo '<div class="userPosts">';
-                echo '<h2>' . $result["title"] . '</h2>';
+                // Link to the individual post using post ID
+                // TODO update URL with correct page name for post page
+                echo '<h2><a id="postURL" href="ViewPostPage.php?id=' . $result["postId"] . '">' . $result["title"] . '</a></h2>';
                 echo '<p><b>Category:</b> ' . $result["interest_name"] . '</p>';
                 echo '<p>' . $result["content"] . '</p>';
                 echo '</div>';
@@ -79,7 +83,9 @@
             // Display user's post feed if there is no query being made
             foreach ($postInfo as $post) {
                 echo '<div class="userPosts">';
-                echo '<h2>' . $post["title"] . '</h2>';
+                // Link to the individual post using post ID
+                // TODO update URL with correct page name for post page
+                echo '<h2><a id="postURL" href="ViewPostPage.php?id=' . $post["postId"] . '">' . $post["title"] . '</a></h2>';
                 echo '<p><b>Category:</b> ' . $post["interest_name"] . '</p>';
                 echo '<p>' . $post["content"] . '</p>';
                 echo '</div>';
@@ -94,7 +100,7 @@
       <p id="footerPhoneNum">778-123-4567</p>
       <p id="footerEmail">iblogs@blogger.com</p>
       <p>
-        <img src="images/twitter (1).png" alt="Twitter" width="30" />
+        <img src="images/twitter.png" alt="Twitter" width="30" />
         <img src="images/facebook.png" alt="Facebook" width="30" />
         <img src="images/insta.png" alt="Instagram" width="30" />
       </p>

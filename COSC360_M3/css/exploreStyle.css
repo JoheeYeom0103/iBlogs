@@ -17,6 +17,14 @@ also adds padding from the header */
     padding-top: 2.5em;
 } */
 
+#postURL{
+    color:#000;
+}
+
+#postURL:hover{
+    color:#D3C1AB;
+}
+
 .mainSearch input{
     width: 60%;
     padding: 0.5em;
@@ -123,6 +131,10 @@ section#userPostSection{
     background-color: #F9EDE2;
 }
 
+.userPosts:hover{
+    background-color: #F8F5EE;
+}
+
 .interestContainer {
     position: relative;
     width: 100%;
@@ -146,6 +158,21 @@ section#userPostSection{
     background: #D3C1AB !important;
     margin-left: 0.25em;
     border-radius: 12px;
+}
+
+.backButton{
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #f4e5ce;
+    color: black;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-top: 10px; 
+    margin-left: 1em;
+}
+
+.backButton:hover {
+    background-color: #D3C1Ab;
 }
 
 
@@ -181,6 +208,17 @@ section#userPostSection{
 
     .userPosts {
         width: 95%; /* Adjusting width for mobile */
+    }
+
+    .backButton{
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #f4e5ce;
+        color: black;
+        text-decoration: none;
+        border-radius: 5px;
+        margin-top: 10px; 
+        margin-left: 4em;
     }
 
 } /* End Media Query */
