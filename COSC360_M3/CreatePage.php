@@ -32,6 +32,8 @@
               </form>
             </li>
             <li><a href="AccountPage.php" class="menu">@<?php echo $userId?></a></li>
+            <li><a href="explore.php" class="menu">Home</a></li>
+
             </ul>
 
         </nav>
@@ -41,7 +43,7 @@
         <form id="createPostForm" action="php/createpageAction.php" method="post">
         
             <div class="header">
-            <h2>February 5, 2024</h2>
+            <h2><?php echo date('F j, Y'); ?></h2>
             <hr class="line">
             <img src="images/title.svg" class="title-icon"/>
             <p class="inputHint">Title: </p>

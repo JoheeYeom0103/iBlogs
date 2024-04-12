@@ -98,12 +98,14 @@
                     </form>
                 </li>
                 <li><a href="#" class="menu">@<?php echo $userId ?></a></li>
+                <li><a href="explore.php" class="menu">Home</a></li>
+
             </ul>
         </nav>
     </header> 
 
     <div class="user-profile">  
-        <img src="<?php echo $profileImg !== '' ? 'uploads/' . $profileImg : 'images/userIcon.svg'; ?>" alt="User Icon" class="circular">
+    <img src="<?php echo isset($profileImg) && $profileImg !== '' ? 'uploads/' . $profileImg : 'images/userIcon.svg'; ?>" alt="User Icon" class="circular">
         <p><?php echo $userId ?></p>
         <div class="button-container">
             <a href="EditAccountPage.php"><button class="round-button">Edit Account</button></a>

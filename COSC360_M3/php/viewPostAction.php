@@ -69,30 +69,28 @@ if(isset($_GET['id'])) {
             echo "<p><strong>Comments</strong></p>";
             while($comment = mysqli_fetch_assoc($commentResult)) {
                 $commentID = $comment['CommentId'];
-                $style = null;
-              if($_SESSION['userId'] !== $comment['CommentId']){
-                $style = 'style="display: none; margin: 0em 1em 1em 1em"';
-              }else $style ='';
-
-                echo "<div style='border: 1px black solid; font-size: 11px; margin-top: 20px'>";
-                            
-                echo "<tr rowspan='3'>
-                <td>
-                    <p><strong>User: </strong>" . $comment['UserId'] . "</p>
-                    <p><strong>Date: </strong>" . $comment['DateOfComment'] . "</p>
-                    <p><strong> </strong>" . $comment['Content'] . "</p>
-                    </td>
-            
-                    <td>
-                    <form class='deleteComment' id='deleteComment" . $comment['CommentId'] . "' method='post' action='ViewPostPage.php?id=" . $postId . "'>
+                $delButton = null;
+                if ($_SESSION['userId'] !== $comment['UserId']) {
+                    $delButton = '';
+                } else {
+                    $delButton = "<form class='deleteComment' id='deleteComment" . $comment['CommentId'] . "' method='post' action='ViewPostPage.php?id=" . $postId . "'>
                     <input type='hidden' name='deleteComment' value='" . $comment['CommentId'] . "'>
-                    <button type='submit' name='deleteComment'" . $style . ">Delete</button>
-                    </form>
-                    </td>
-            
-                    </tr>
-                </div>"; 
+                    <button type='submit' name='deleteComment' style='display: none;' >Delete</button>
+                    </form>";
+                }
 
+                echo "<div style='border: 1px black solid; font-size: 11px; margin-top: 20px'>
+                        <p><strong>User: </strong>" . $comment['UserId'] . "</p>
+                        <p><strong>Date: </strong>" . $comment['DateOfComment'] . "</p>
+                        <p><strong> </strong>" . $comment['Content'] . "</p>"
+                        . $delButton . 
+                    "</div>";
+
+                if ($_SESSION['userId'] === $comment['UserId']) {
+                    echo "<script>
+                    document.getElementById('deleteComment" . $comment['CommentId'] . "').querySelector('button').style.display = 'block';
+                    </script>";
+                }
                             
                 if (isset($_POST['deleteComment'])) {
                     $deleteCommentId = $commentID;

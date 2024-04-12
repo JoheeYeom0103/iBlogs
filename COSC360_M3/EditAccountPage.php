@@ -146,6 +146,7 @@ include('php/EditAccountPage_Action.php');
               </form>
             </li>
             <li><a href="AccountPage.php" class="menu">@<?php echo $old_userId ?></a></li>
+            <li><a href="explore.php" class="menu">Home</a></li>
             </ul>
         </nav>
     </header> 
@@ -157,7 +158,7 @@ include('php/EditAccountPage_Action.php');
             <h3 class="profile-heading">Photo</h3>
             <!-- Add the "circular" class to the image tag -->
             <!-- removed uploads file path from here -->
-            <img id="profileImgPreview" src="<?php echo $old_img !== '' ? $old_img : 'images/userIcon.svg'; ?>" alt="User Icon" class="circular">
+            <img id="profileImgPreview" src="<?php echo isset($old_img) && $old_img !== '' ? $old_img : 'images/userIcon.svg'; ?>" alt="User Icon" class="circular">
             <label for="changeImg" class="file-upload-button">
                 Change
                 <input type="file" name="changeImg" id="changeImg">
