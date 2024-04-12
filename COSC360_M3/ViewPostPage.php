@@ -70,10 +70,10 @@
 
         
 
-        <form class='deleteForm' id='deleteForm" . $postRow['PostId'] . "' method='post' action='".$_SERVER["PHP_SELF"]."'>
+        <!-- <form class='deleteForm' id='deleteForm" . $postRow['PostId'] . "' method='post' action='".$_SERVER["PHP_SELF"]."'>
             <input type='hidden' name='delete' value='" . $postRow['PostId'] . "'>
             <button type='submit' style='display: block; margin: 0 auto;'>Delete</button>
-        </form>
+        </form> -->
     </div>
 
 </body>

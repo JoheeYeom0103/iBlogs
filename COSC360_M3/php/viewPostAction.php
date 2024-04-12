@@ -15,6 +15,8 @@ if(isset($_GET['id'])) {
     if(mysqli_num_rows($result) > 0) {
         $post = mysqli_fetch_assoc($result);
 
+        echo "<a href='explore.php' class='backButton'>Back to Home</a>";
+
         echo "<div class='diary-container'>        
                 <div class='header'>
                 <img src='images/title.svg' class='title-icon'/>
@@ -52,6 +54,7 @@ if(isset($_GET['id'])) {
         }
 
         // ----------------------------------------------------------------------------------------------------------------
+        // BEGIN COMMENT LOGIC
         // ----------------------------------------------------------------------------------------------------------------
 
         // Retrieve and display comments for this post
@@ -59,49 +62,77 @@ if(isset($_GET['id'])) {
         mysqli_stmt_bind_param($commentStmt, "i", $postId);
         mysqli_stmt_execute($commentStmt);
         $commentResult = mysqli_stmt_get_result($commentStmt);
+        $commentID = 0;
 
         // Check if any comments were returned
         if(mysqli_num_rows($commentResult) > 0) {
             echo "<p><strong>Comments</strong></p>";
             while($comment = mysqli_fetch_assoc($commentResult)) {
+                $commentID = $comment['CommentId'];
+                $style = null;
+              if($_SESSION['userId'] !== $comment['CommentId']){
+                $style = 'style="display: none; margin: 0em 1em 1em 1em"';
+              }else $style ='';
+
                 echo "<div style='border: 1px black solid; font-size: 11px; margin-top: 20px'>";
-                    
+                            
                 echo "<tr rowspan='3'>
                 <td>
                     <p><strong>User: </strong>" . $comment['UserId'] . "</p>
                     <p><strong>Date: </strong>" . $comment['DateOfComment'] . "</p>
                     <p><strong> </strong>" . $comment['Content'] . "</p>
                     </td>
-
+            
                     <td>
                     <form class='deleteComment' id='deleteComment" . $comment['CommentId'] . "' method='post' action='ViewPostPage.php?id=" . $postId . "'>
                     <input type='hidden' name='deleteComment' value='" . $comment['CommentId'] . "'>
-                    <button type='submit' name='deleteComment' " . ($_SESSION['userId'] !== $comment['UserId'] ? 'style="display: none;"' : '') . ">Delete</button>
+                    <button type='submit' name='deleteComment'" . $style . ">Delete</button>
                     </form>
                     </td>
-
+            
                     </tr>
-                </div>";
+                </div>"; 
 
-                // delete comment
-            if (isset($_POST['deleteComment'])) {
-                $deleteCommentId = $comment['CommentId'];
-                $deleteCommentSql = "DELETE FROM comment WHERE CommentId = ?";
-                $deleteCommentPstmt = mysqli_prepare($connection, $deleteCommentSql);
-                mysqli_stmt_bind_param($deleteCommentPstmt, "i", $deleteCommentId);
+                            
+                if (isset($_POST['deleteComment'])) {
+                    $deleteCommentId = $commentID;
+                    $deleteCommentSql = "DELETE FROM comment WHERE CommentId = ?";
+                    $deleteCommentPstmt = mysqli_prepare($connection, $deleteCommentSql);
+                    mysqli_stmt_bind_param($deleteCommentPstmt, "i", $deleteCommentId);
                 if (mysqli_stmt_execute($deleteCommentPstmt)) {
-                    echo "Comment deleted successfully.";
                     header("Location: ViewPostPage.php?id=" . $postId);
+                    exit();
                 } else {
                     echo "Error deleting comment: " . mysqli_error($connection);
                 }
-            } // end of if for deleting a comment  
-                
-            } // end while 
+            }
+        }            
 
         } else {
             echo "<p>No comments found</p>";
         }
+
+        // ---------------------------------------------------------------------------------------------------------------------------------------
+        // DELETING OF POST
+        // ---------------------------------------------------------------------------------------------------------------------------------------
+
+        echo "<form class='deletePost' id='deletePost" . $post['PostId'] . "' method='post' action='ViewPostPage.php?id=" . $postId . "'>
+            <input type='hidden' name='deletePost' value='" . $post['PostId'] . "'>
+            <button style='margin-top:1.5em;' type='submit' name='deletePost' " . ($_SESSION['userId'] !== $post['UserId'] ? 'style="display: none;"' : '') . ">Delete This Post</button>
+        </form>";
+
+        if (isset($_POST['deletePost'])) {
+            $deletePostId = $post['PostId'];
+            $deletePostSql = "DELETE FROM post WHERE PostId = ?";
+            $deletePostPstmt = mysqli_prepare($connection, $deletePostSql);
+            mysqli_stmt_bind_param($deletePostPstmt, "i", $deletePostId);
+            if (mysqli_stmt_execute($deletePostPstmt)) {
+                header("Location: explore.php");
+                echo "Post deleted successfully.";
+            } else {
+                echo "Error deleting post: " . mysqli_error($connection);
+            }
+        } // end of if for deleting a post  
 
     } else {
         echo "Post not found";

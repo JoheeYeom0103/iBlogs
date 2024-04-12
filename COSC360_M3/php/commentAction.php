@@ -6,7 +6,7 @@ require("dbConnect.php");
 
 session_start();
 
-if(isset($_SESSION['userId']) && isset($_POST['postId']) && isset($_POST['commentContent'])) {
+if(isset($_SESSION['userId']) && isset($_POST['postId']) && isset($_POST['commentContent']) && $_POST['commentContent'] !== null) {
 
     $postId = $_POST['postId'];
     $commentContent = $_POST['commentContent'];

@@ -177,3 +177,18 @@ Keep the display to block when share-options is hovered even if share-btn is not
 .tooltip-share:hover .tooltip-message {
   opacity: 1;
 }
+
+.backButton{
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #f4e5ce;
+  color: black;
+  text-decoration: none;
+  border-radius: 5px;
+  margin-top: 10px; 
+  margin-left: 1em;
+}
+
+.backButton:hover {
+  background-color: #D3C1Ab;
+}
